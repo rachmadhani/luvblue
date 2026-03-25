@@ -100,7 +100,7 @@ const hoveredPixel = ref<any>(null)
     <!-- Header -->
     <header class="text-center mb-12">
       <p class="text-[10px] tracking-[0.3em] font-semibold text-blue-900/60 uppercase mb-4">
-        #LOVEBLUE · ECOSOFT INTERACTIVE
+        #LUVBLU · ECOSOFT INTERACTIVE
       </p>
       <h1 class="text-5xl md:text-6xl font-serif text-blue-950 mb-4 leading-tight">
         Every blue moment <br />
@@ -179,7 +179,7 @@ const hoveredPixel = ref<any>(null)
         Add your blue moment
       </button>
       <p class="mt-4 text-[10px] text-slate-400 font-medium pb-24">
-        Post on Instagram with <span class="text-blue-500">#LoveBlue</span> and tag <span class="text-blue-500">@ashley_loveblue</span>
+        Post on Instagram with <span class="text-blue-500">#LUVBLU</span> and tag <span class="text-blue-500">@ashley_luvblu</span>
       </p>
     </div>
   </main>
