@@ -15,6 +15,10 @@ const gridCols = 25
 // Two bumps at top, merging in middle, tapering to a point at bottom
 // Total pixels: ~500
 const heartMask: [number, number][][] = [
+  // top row 0.1
+  [[5,8], [16,19]],
+  // top row 0.2 
+  [[4,9], [15,20]],
   // Row 0: two small bumps starting
   [[3, 10], [14, 21]],          // 8 + 8 = 16
   // Row 1: bumps widen
