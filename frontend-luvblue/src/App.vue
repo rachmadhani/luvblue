@@ -72,7 +72,7 @@ const heartMask: [number, number][][] = [
 ]
 
 const pixels = computed(() => {
-  const result: { r: number; c: number; opacity: number; username: string }[] = []
+  const result: { r: number; c: number; opacity: number; username: string; hasImage: boolean }[] = []
   
   for (let r = 0; r < heartMask.length; r++) {
     const ranges = heartMask[r]
@@ -83,7 +83,8 @@ const pixels = computed(() => {
           r,
           c,
           opacity: 0.3 + Math.random() * 0.6,
-          username: `@user_${result.length + 1}`
+          username: `@user_${result.length + 1}`,
+          hasImage: r >= 22
         })
       }
     }
@@ -112,7 +113,7 @@ const hoveredPixel = ref<any>(null)
     </header>
 
     <!-- Heart Grid -->
-    <div class="relative max-w-4xl mx-auto flex justify-center mb-16">
+    <div class="relative max-w-4xl mx-auto flex justify-center mb-32">
       <div 
         class="grid gap-1.5"
         :style="{ 
@@ -131,12 +132,14 @@ const hoveredPixel = ref<any>(null)
         <div
           v-for="pixel in pixels"
           :key="`${pixel.r}-${pixel.c}`"
-          class="absolute aspect-square rounded-[3px] bg-blue-500 cursor-pointer transition-all duration-300 hover:scale-150 hover:z-20 group"
+          class="absolute aspect-square rounded-[3px] cursor-pointer transition-all duration-300 hover:scale-150 hover:z-20 group"
+          :class="pixel.hasImage ? 'bg-cover bg-center border border-blue-400/30' : 'bg-blue-500'"
           :style="{
             top: `calc(${pixel.r} * (100% / ${gridRows}))`,
             left: `calc(${pixel.c} * (100% / ${gridCols}))`,
             width: `calc(100% / ${gridCols} - 3px)`,
-            opacity: pixel.opacity
+            opacity: pixel.hasImage ? 1 : pixel.opacity,
+            backgroundImage: pixel.hasImage ? 'url(/heart-bg.jpg)' : 'none'
           }"
           @mouseenter="hoveredPixel = pixel"
           @mouseleave="hoveredPixel = null"
