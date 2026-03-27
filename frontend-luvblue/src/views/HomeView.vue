@@ -5,7 +5,7 @@ const photosShared = 128
 const heartPixels = 500
 const heartFilled = 26
 
-const gridRows = 25
+const gridRows = 27 // Matches heartMask length
 const gridCols = 25
 
 const heartMask: [number, number][][] = [
@@ -102,7 +102,7 @@ const closeModal = () => {
         <div 
           v-for="i in gridRows * gridCols" 
           :key="i"
-          class="aspect-square rounded-[3px] bg-blue-100/10 border border-blue-500/5"
+          class="aspect-square"
         ></div>
 
         <div
