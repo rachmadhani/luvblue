@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { authService } from '@/services/authService'
 
 // Public layout components
 import HomeView from '../views/HomeView.vue'
@@ -146,7 +147,18 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title || 'LUVBLU'} | LuvBlue`
-  next()
+
+  const isLoggedIn = authService.isLoggedIn()
+  const requiresAuth = to.path.startsWith('/admin')
+  const isAuthPage = to.path === '/signin' || to.path === '/signup'
+
+  if (requiresAuth && !isLoggedIn) {
+    next('/signin')
+  } else if (isAuthPage && isLoggedIn) {
+    next('/admin')
+  } else {
+    next()
+  }
 })
 
 export default router
