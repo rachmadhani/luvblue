@@ -229,6 +229,7 @@ import {
   TableIcon,
   ListIcon,
   PlugInIcon,
+  CameraIcon,
 } from "../../icons";
 import SidebarWidget from "./SidebarWidget.vue";
 import BoxCubeIcon from "@/icons/BoxCubeIcon.vue";
@@ -245,73 +246,13 @@ const menuGroups = [
       {
         icon: GridIcon,
         name: "Dashboard",
-        subItems: [{ name: "Ecommerce", path: "/admin", pro: false }],
+        path: "/admin",
       },
       {
-        icon: CalenderIcon,
-        name: "Calendar",
-        path: "/admin/calendar",
+        icon: CameraIcon,
+        name: "Instagram",
+        path: "/admin/instagram",
       },
-      {
-        icon: UserCircleIcon,
-        name: "User Profile",
-        path: "/admin/profile",
-      },
-
-      {
-        name: "Forms",
-        icon: ListIcon,
-        subItems: [
-          { name: "Form Elements", path: "/admin/form-elements", pro: false },
-        ],
-      },
-      {
-        name: "Tables",
-        icon: TableIcon,
-        subItems: [{ name: "Basic Tables", path: "/admin/basic-tables", pro: false }],
-      },
-      {
-        name: "Pages",
-        icon: PageIcon,
-        subItems: [
-          { name: "Black Page", path: "/admin/blank", pro: false },
-          { name: "404 Page", path: "/error-404", pro: false },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Others",
-    items: [
-      {
-        icon: PieChartIcon,
-        name: "Charts",
-        subItems: [
-          { name: "Line Chart", path: "/admin/line-chart", pro: false },
-          { name: "Bar Chart", path: "/admin/bar-chart", pro: false },
-        ],
-      },
-      {
-        icon: BoxCubeIcon,
-        name: "Ui Elements",
-        subItems: [
-          { name: "Alerts", path: "/admin/alerts", pro: false },
-          { name: "Avatars", path: "/admin/avatars", pro: false },
-          { name: "Badge", path: "/admin/badge", pro: false },
-          { name: "Buttons", path: "/admin/buttons", pro: false },
-          { name: "Images", path: "/admin/images", pro: false },
-          { name: "Videos", path: "/admin/videos", pro: false },
-        ],
-      },
-      {
-        icon: PlugInIcon,
-        name: "Authentication",
-        subItems: [
-          { name: "Signin", path: "/signin", pro: false },
-          { name: "Signup", path: "/signup", pro: false },
-        ],
-      },
-      // ... Add other menu items here
     ],
   },
 ];

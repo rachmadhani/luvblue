@@ -156,23 +156,48 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import CommonGridShape from '@/components/common/CommonGridShape.vue'
 import FullScreenLayout from '@/components/layout/FullScreenLayout.vue'
+import { authService } from '@/services/authService'
+import { useToast } from '@/composables/useToast'
+
+const router = useRouter()
+const toast = useToast()
+
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const keepLoggedIn = ref(false)
+const isLoading = ref(false)
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value
 }
 
-const handleSubmit = () => {
-  // Handle form submission
-  console.log('Form submitted', {
-    email: email.value,
-    password: password.value,
-    keepLoggedIn: keepLoggedIn.value,
-  })
+const handleSubmit = async () => {
+  if (!email.value || !password.value) {
+    toast.error('Please enter both email and password')
+    return
+  }
+
+  isLoading.value = true
+  try {
+    const response = await authService.login({
+      email: email.value,
+      password: password.value
+    })
+
+    if (response.success) {
+      toast.success('Login successful! Welcome back.')
+      router.push('/admin')
+    } else {
+      toast.error(response.message || 'Login failed')
+    }
+  } catch (error: any) {
+    toast.error(error.message || 'An error occurred during login')
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>

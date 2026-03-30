@@ -104,6 +104,12 @@ const router = createRouter({
       meta: { title: 'Videos' },
     },
     {
+      path: '/admin/instagram',
+      name: 'Instagram Management',
+      component: () => import('../views/Instagram/InstagramManagement.vue'),
+      meta: { title: 'Instagram Management' },
+    },
+    {
       path: '/admin/blank',
       name: 'Blank',
       component: () => import('../views/Pages/BlankPage.vue'),
