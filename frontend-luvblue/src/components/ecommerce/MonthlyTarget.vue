@@ -140,6 +140,7 @@ const menuItems = [
   { label: 'Delete', onClick: () => console.log('Delete clicked') },
 ]
 import VueApexCharts from 'vue3-apexcharts'
+import type { ApexOptions } from 'apexcharts'
 
 const props = defineProps({
   value: {
@@ -150,7 +151,7 @@ const props = defineProps({
 
 const series = computed(() => [props.value])
 
-const chartOptions = {
+const chartOptions: ApexOptions = {
   colors: ['#465FFF'],
   chart: {
     fontFamily: 'Outfit, sans-serif',
@@ -191,7 +192,7 @@ const chartOptions = {
     colors: ['#465FFF'],
   },
   stroke: {
-    lineCap: 'round',
+    lineCap: 'round' as const,
   },
   labels: ['Progress'],
 }

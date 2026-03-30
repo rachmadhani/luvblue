@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import DropdownMenu from '../common/DropdownMenu.vue'
 const menuItems = [
@@ -44,6 +44,11 @@ const menuItems = [
 ]
 
 import VueApexCharts from 'vue3-apexcharts'
+import type { ApexOptions } from 'apexcharts'
+
+const flatpickrConfig = {
+  mode: 'range' as const,
+}
 
 const series = ref([
   {
@@ -52,7 +57,7 @@ const series = ref([
   },
 ])
 
-const chartOptions = ref({
+const chartOptions = ref<ApexOptions>({
   colors: ['#465fff'],
   chart: {
     fontFamily: 'Outfit, sans-serif',
@@ -105,11 +110,11 @@ const chartOptions = ref({
     horizontalAlign: 'left',
     fontFamily: 'Outfit',
     markers: {
-      radius: 99,
+      size: 6,
     },
   },
   yaxis: {
-    title: false,
+    title: { text: undefined },
   },
   grid: {
     yaxis: {
