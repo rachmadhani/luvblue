@@ -4,10 +4,10 @@ import { ref } from 'vue'
 const isMenuOpen = ref(false)
 
 const navLinks = [
-  { name: '500 Blue Heart', href: '/' },
-  { name: 'Gallery', href: '/gallery' },
-  { name: 'About', href: '/about' },
-  { name: 'Community', href: '/community' }
+  { name: '500 Blue Heart', to: { name: 'Home' } },
+  { name: 'Gallery', to: { name: 'Gallery' } },
+  { name: 'About', to: { name: 'About' } },
+  { name: 'Community', to: { name: 'Community' } }
 ]
 
 const toggleMenu = () => {
@@ -20,25 +20,26 @@ const toggleMenu = () => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <!-- Logo -->
-        <div class="flex-shrink-0 flex items-center gap-2">
+        <RouterLink :to="{ name: 'Home' }" class="flex-shrink-0 flex items-center gap-2">
           <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center transform rotate-3 shadow-blue-200 shadow-lg">
             <span class="text-white font-serif text-lg">L</span>
           </div>
           <span class="text-blue-950 font-serif text-xl tracking-tight">LUVBLU</span>
-        </div>
+        </RouterLink>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-8">
-          <a v-for="link in navLinks" :key="link.name" :href="link.href" 
-             class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+          <RouterLink v-for="link in navLinks" :key="link.name" :to="link.to" 
+             class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+             active-class="text-blue-600">
             {{ link.name }}
-          </a>
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-blue-100 flex items-center gap-2">
+          </RouterLink>
+          <RouterLink :to="{ name: 'Signin' }" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-blue-100 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
             Add Moment
-          </button>
+          </RouterLink>
         </div>
 
         <!-- Mobile menu button -->
@@ -61,17 +62,19 @@ const toggleMenu = () => {
       leave-to-class="opacity-0 -translate-y-4"
     >
       <div v-if="isMenuOpen" class="md:hidden bg-white border-b border-blue-50 py-4 px-4 space-y-1">
-        <a v-for="link in navLinks" :key="link.name" :href="link.href" 
-           class="block px-3 py-2.5 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-xl transition-all">
+        <RouterLink v-for="link in navLinks" :key="link.name" :to="link.to" 
+           @click="isMenuOpen = false"
+           class="block px-3 py-2.5 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-xl transition-all"
+           active-class="text-blue-600 bg-blue-50/50">
           {{ link.name }}
-        </a>
+        </RouterLink>
         <div class="pt-4 pb-2">
-          <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all shadow-md flex items-center justify-center gap-2">
+          <RouterLink :to="{ name: 'Signin' }" @click="isMenuOpen = false" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all shadow-md flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
             Add Moment
-          </button>
+          </RouterLink>
         </div>
       </div>
     </Transition>

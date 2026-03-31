@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { instagramService } from '@/services/instagramService'
+import { getImageUrl } from '@/utils/imageUrl'
 
-const photosShared = 128
-const heartPixels = 500
-const heartFilled = 26
+const photosShared = ref(0)
+const heartPixels = ref(0)
+const heartFilled = ref(0)
+const posts = ref<any[]>([])
 
 const gridRows = 27 // Matches heartMask length
 const gridCols = 25
@@ -39,24 +42,43 @@ const heartMask: [number, number][][] = [
 ]
 
 const pixels = computed(() => {
-  const result: { r: number; c: number; opacity: number; username: string; hasImage: boolean }[] = []
+  const positions: { r: number; c: number; opacity: number }[] = []
   
+  // Generate all possible heart positions
   for (let r = 0; r < heartMask.length; r++) {
     const ranges = heartMask[r]
     if (!ranges) continue
     for (const [start, end] of ranges) {
       for (let c = start; c <= end; c++) {
-        result.push({
+        positions.push({
           r,
           c,
-          opacity: 0.3 + Math.random() * 0.6,
-          username: `@user_${result.length + 1}`,
-          hasImage: r >= 22
+          opacity: 0.3 + Math.random() * 0.6
         })
       }
     }
   }
-  return result
+
+  // Map posts to positions from the bottom up
+  // posts.value are usually newest first, so reverse to fill bottom with oldest? 
+  // Or newest at the very bottom? Let's assume newest at the very bottom.
+  const totalPositions = positions.length
+  const occupiedCount = posts.value.length
+  const startIndex = Math.max(0, totalPositions - occupiedCount)
+
+  return positions.map((pos, index) => {
+    const postIndex = index - startIndex
+    const post = postIndex >= 0 ? posts.value[occupiedCount - 1 - postIndex] : null
+    
+    return {
+      ...pos,
+      post: post,
+      hasImage: !!post,
+      username: post ? (post.instagram_users ? (post.instagram_users.trim().startsWith('@') ? post.instagram_users.trim() : `@${post.instagram_users.trim()}`) : 'Anonymous') : `@user_${index + 1}`,
+      // Use the first image from the comma-separated list
+      displayImage: post ? getImageUrl(post.image_url.split(',')[0].trim()) : null
+    }
+  })
 })
 
 const hoveredPixel = ref<any>(null)
@@ -71,6 +93,34 @@ const openPixel = (pixel: any) => {
 const closeModal = () => {
   selectedPixel.value = null
 }
+
+const fetchStats = async () => {
+  try {
+    const [statsRes, postsRes]: any = await Promise.all([
+      instagramService.getStats(),
+      instagramService.getAll(1, 1000)
+    ])
+
+    if (statsRes.success && statsRes.data) {
+      photosShared.value = statsRes.data.totalPhotosShared
+      heartPixels.value = statsRes.data.heartPixels
+      heartFilled.value = statsRes.data.heartFilled
+    }
+
+    if (postsRes.success && postsRes.data) {
+      // The backend returns { data: { data: [...], meta: {...} } }
+      posts.value = Array.isArray(postsRes.data) 
+        ? postsRes.data 
+        : (postsRes.data.data || postsRes.data.rows || [])
+    }
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+  }
+}
+
+onMounted(() => {
+  fetchStats()
+})
 </script>
 
 <template>
@@ -115,7 +165,7 @@ const closeModal = () => {
             left: `calc(${pixel.c} * (100% / ${gridCols}))`,
             width: `calc(100% / ${gridCols} - 3px)`,
             opacity: pixel.hasImage ? 1 : pixel.opacity,
-            backgroundImage: pixel.hasImage ? 'url(/heart-bg.jpg)' : 'none'
+            backgroundImage: pixel.hasImage ? `url(${pixel.displayImage})` : 'none'
           }"
           @mouseenter="hoveredPixel = pixel"
           @mouseleave="hoveredPixel = null"
@@ -180,7 +230,7 @@ const closeModal = () => {
           </button>
 
           <div class="aspect-square w-full bg-slate-100">
-            <img :src="selectedPixel.hasImage ? '/heart-bg.jpg' : ''" class="w-full h-full object-cover" />
+            <img :src="selectedPixel.displayImage" class="w-full h-full object-cover" />
           </div>
 
           <div class="p-6">
@@ -192,7 +242,8 @@ const closeModal = () => {
             </div>
             
             <a 
-              href="https://www.instagram.com/p/DP8HVg9DroX/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" 
+              v-if="selectedPixel.post && selectedPixel.post.instagram_links"
+              :href="selectedPixel.post.instagram_links.split(',')[0].trim()" 
               target="_blank"
               class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
             >

@@ -23,5 +23,9 @@ export const instagramService = {
     return request(`/instagram/${id}`, {
       method: 'DELETE',
     })
+  },
+
+  async getStats() {
+    return request('/instagram/stats')
   }
 }

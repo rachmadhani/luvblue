@@ -22,6 +22,33 @@ const router = createRouter({
         layout: 'public',
       },
     },
+    {
+      path: '/gallery',
+      name: 'Gallery',
+      component: () => import('../views/GalleryView.vue'),
+      meta: {
+        title: 'Gallery - Blue Moments',
+        layout: 'public',
+      },
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: () => import('../views/AboutView.vue'),
+      meta: {
+        title: 'About - One Heart, 500 Stories',
+        layout: 'public',
+      },
+    },
+    {
+      path: '/community',
+      name: 'Community',
+      component: () => import('../views/CommunityView.vue'),
+      meta: {
+        title: 'Community - United by Blue',
+        layout: 'public',
+      },
+    },
 
     // ==================
     // Admin Routes (TailAdmin Dashboard)
