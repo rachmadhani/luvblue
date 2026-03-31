@@ -17,7 +17,6 @@ import { useRoute, RouterView } from 'vue-router'
 import ThemeProvider from './components/layout/ThemeProvider.vue'
 import SidebarProvider from './components/layout/SidebarProvider.vue'
 import HeaderNavbar from './components/HeaderNavbar.vue'
-import ToastContainer from './components/common/toast/ToastContainer.vue'
 
 const route = useRoute()
 

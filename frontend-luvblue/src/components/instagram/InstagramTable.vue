@@ -3,7 +3,7 @@
     <div class="p-4 border-b border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div class="relative w-full sm:w-64">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <SearchIcon width="18" height="18" />
         </span>
         <input
           v-model="searchQuery"
@@ -16,7 +16,7 @@
         @click="$emit('create')"
         class="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <PlusIcon width="16" height="16" />
         Add Post
       </button>
     </div>
@@ -28,15 +28,16 @@
             <th class="px-5 py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">ID</th>
             <th class="px-5 py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Images</th>
             <th class="px-5 py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Users</th>
+            <th class="px-5 py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Links</th>
             <th class="px-5 py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400 text-right">Actions</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
           <tr v-if="loading" class="animate-pulse">
-            <td colspan="4" class="px-5 py-10 text-center text-gray-400">Loading posts...</td>
+            <td colspan="5" class="px-5 py-10 text-center text-gray-400">Loading posts...</td>
           </tr>
           <tr v-else-if="filteredItems.length === 0">
-            <td colspan="4" class="px-5 py-10 text-center text-gray-400">No posts found.</td>
+            <td colspan="5" class="px-5 py-10 text-center text-gray-400">No posts found.</td>
           </tr>
           <tr v-for="item in filteredItems" :key="item.id">
             <td class="px-5 py-4 text-theme-sm text-gray-600 dark:text-gray-400">#{{ item.id }}</td>
@@ -45,7 +46,7 @@
                 <img
                   v-for="(url, idx) in item.image_url.split(',')"
                   :key="idx"
-                  :src="url.trim()"
+                  :src="getImageUrl(url)"
                   class="inline-block h-10 w-10 rounded-lg ring-2 ring-white dark:ring-gray-900 object-cover"
                   alt="Post image"
                 />
@@ -54,6 +55,20 @@
             <td class="px-5 py-4 text-theme-sm text-gray-800 dark:text-white/90">
               {{ item.instagram_users || 'N/A' }}
             </td>
+            <td class="px-5 py-4 text-theme-sm text-gray-600 dark:text-gray-400 max-w-xs truncate">
+              <div v-if="item.instagram_links" class="flex flex-col gap-1">
+                <a
+                  v-for="(link, idx) in item.instagram_links.split(',')"
+                  :key="idx"
+                  :href="link.trim()"
+                  target="_blank"
+                  class="text-blue-500 hover:underline truncate"
+                >
+                  {{ link.trim() }}
+                </a>
+              </div>
+              <span v-else>N/A</span>
+            </td>
             <td class="px-5 py-4 text-right">
               <div class="flex items-center justify-end gap-2">
                 <button
@@ -61,14 +76,14 @@
                   class="p-2 text-gray-400 hover:text-blue-600 transition-colors"
                   title="Edit"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  <EditIcon width="18" height="18" />
                 </button>
                 <button
                   @click="$emit('delete', item.id)"
                   class="p-2 text-gray-400 hover:text-red-500 transition-colors"
                   title="Delete"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                  <TrashIcon width="18" height="18" />
                 </button>
               </div>
             </td>
@@ -104,6 +119,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { SearchIcon, PlusIcon, EditIcon, TrashIcon } from '@/icons'
+import { getImageUrl } from '@/utils/imageUrl'
 
 const props = defineProps<{
   items: any[]
@@ -121,6 +138,7 @@ const filteredItems = computed(() => {
   const q = searchQuery.value.toLowerCase()
   return props.items.filter(item => 
     (item.instagram_users || '').toLowerCase().includes(q) ||
+    (item.instagram_links || '').toLowerCase().includes(q) ||
     item.id.toString().includes(q)
   )
 })

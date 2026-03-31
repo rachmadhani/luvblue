@@ -1,5 +1,11 @@
 <template>
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    :width="width || 20"
+    :height="height || 20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -8,3 +14,10 @@
     />
   </svg>
 </template>
+
+<script setup lang="ts">
+defineProps<{
+  width?: string | number
+  height?: string | number
+}>()
+</script>

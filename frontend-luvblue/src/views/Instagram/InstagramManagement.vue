@@ -28,6 +28,15 @@
           />
         </div>
         <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Instagram Links (comma separated)</label>
+          <input
+            v-model="form.instagram_links"
+            type="text"
+            placeholder="e.g. https://instgr.am/p/1, https://instgr.am/p/2"
+            class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
+          />
+        </div>
+        <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
             Image {{ isEditing ? '(optional if no change)' : '' }}
           </label>
@@ -40,7 +49,7 @@
         </div>
         <div v-if="previewUrl" class="mt-2">
           <p class="text-xs text-gray-400 mb-1">Preview:</p>
-          <img :src="previewUrl" class="h-32 rounded-lg object-cover border border-gray-200 dark:border-gray-700" />
+          <img :src="getImageUrl(previewUrl)" class="h-32 rounded-lg object-cover border border-gray-200 dark:border-gray-700" />
         </div>
       </form>
       <template #footer>
@@ -56,6 +65,31 @@
         </button>
       </template>
     </Modal>
+
+    <!-- Delete Confirmation Modal -->
+    <Modal :show="showDeleteModal" title="Confirm Delete" @close="closeDeleteModal">
+      <div class="p-6 text-center">
+        <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+          <TrashIcon class="text-red-500" width="24" height="24" />
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Delete Post?</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Are you sure you want to delete this Instagram post? This action cannot be undone.
+        </p>
+      </div>
+      <template #footer>
+        <button @click="closeDeleteModal" class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700">
+          Cancel
+        </button>
+        <button
+          @click="executeDelete"
+          :disabled="deleting"
+          class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+        >
+          {{ deleting ? 'Deleting...' : 'Delete Now' }}
+        </button>
+      </template>
+    </Modal>
   </AdminLayout>
 </template>
 
@@ -65,23 +99,29 @@ import AdminLayout from '@/components/layout/AdminLayout.vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import InstagramTable from '@/components/instagram/InstagramTable.vue'
 import Modal from '@/components/common/modal/Modal.vue'
+import { TrashIcon } from '@/icons'
 import { instagramService } from '@/services/instagramService'
 import { useToast } from '@/composables/useToast'
+import { getImageUrl } from '@/utils/imageUrl'
 
 const toast = useToast()
-const items = ref([])
+const items = ref<any[]>([])
 const loading = ref(false)
 const saving = ref(false)
 const currentPage = ref(1)
 const totalPages = ref(1)
 const showModal = ref(false)
+const showDeleteModal = ref(false)
 const isEditing = ref(false)
 const currentId = ref<number | null>(null)
+const itemToDelete = ref<number | null>(null)
 const selectedFile = ref<File | null>(null)
 const previewUrl = ref('')
+const deleting = ref(false)
 
 const form = reactive({
-  instagram_users: ''
+  instagram_users: '',
+  instagram_links: ''
 })
 
 const fetchItems = async () => {
@@ -89,8 +129,15 @@ const fetchItems = async () => {
   try {
     const response = await instagramService.getAll(currentPage.value) as any
     if (response.success) {
-      items.value = response.data.data
-      totalPages.value = response.data.meta.totalPages
+      // Support both { data: [...] } and { data: { data: [...], meta: {...} } }
+      const responseData = response.data
+      if (Array.isArray(responseData)) {
+        items.value = responseData
+        totalPages.value = 1
+      } else if (responseData?.data && Array.isArray(responseData.data)) {
+        items.value = responseData.data
+        totalPages.value = responseData.meta?.totalPages || 1
+      }
     }
   } catch (error: any) {
     toast.error('Failed to fetch Instagram posts')
@@ -118,6 +165,7 @@ const openCreateModal = () => {
   selectedFile.value = null
   previewUrl.value = ''
   form.instagram_users = ''
+  form.instagram_links = ''
   showModal.value = true
 }
 
@@ -127,6 +175,7 @@ const openEditModal = (item: any) => {
   selectedFile.value = null
   previewUrl.value = item.image_url.split(',')[0].trim() // Best effort preview
   form.instagram_users = item.instagram_users || ''
+  form.instagram_links = item.instagram_links || ''
   showModal.value = true
 }
 
@@ -146,6 +195,7 @@ const savePost = async () => {
     formData.append('instagram_image', selectedFile.value)
   }
   formData.append('instagram_users', form.instagram_users)
+  formData.append('instagram_links', form.instagram_links)
 
   try {
     if (isEditing.value && currentId.value) {
@@ -164,15 +214,33 @@ const savePost = async () => {
   }
 }
 
-const confirmDelete = async (id: number) => {
-  if (confirm('Are you sure you want to delete this post?')) {
-    try {
-      await instagramService.delete(id)
+const confirmDelete = (id: number) => {
+  itemToDelete.value = id
+  showDeleteModal.value = true
+}
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false
+  itemToDelete.value = null
+}
+
+const executeDelete = async () => {
+  if (!itemToDelete.value) return
+  
+  deleting.value = true
+  try {
+    const response = await instagramService.delete(itemToDelete.value) as any
+    if (response.success) {
       toast.success('Post deleted successfully')
-      fetchItems()
-    } catch (error: any) {
-      toast.error('Failed to delete post')
+    } else {
+      toast.error(response.message || 'Failed to delete post')
     }
+  } catch (error: any) {
+    toast.error(error.message || 'Failed to delete post')
+  } finally {
+    deleting.value = false
+    fetchItems()
+    closeDeleteModal()
   }
 }
 

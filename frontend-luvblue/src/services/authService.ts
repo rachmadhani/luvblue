@@ -6,18 +6,32 @@ export const authService = {
       method: 'POST',
       body: JSON.stringify(credentials),
     })
-    
-    if (response.success && response.data?.token) {
-      localStorage.setItem('token', response.data.token)
-      localStorage.setItem('user', JSON.stringify(response.data.user))
+
+    // Support both root-level and data-level token/user (OpenAPI vs common patterns)
+    const token = response.token || response.data?.token
+    const user = response.user || response.data?.user
+
+    if (response.success && token) {
+      localStorage.setItem('token', token)
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user))
+      }
     }
-    
+
     return response
   },
 
-  logout() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+  async logout() {
+    try {
+      await request('/auth/logout', {
+        method: 'POST',
+      })
+    } catch (error) {
+      console.error('Logout API call failed', error)
+    } finally {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+    }
   },
 
   isLoggedIn() {
