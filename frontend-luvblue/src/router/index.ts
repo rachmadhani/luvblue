@@ -49,6 +49,24 @@ const router = createRouter({
         layout: 'public',
       },
     },
+    {
+      path: '/diary',
+      name: 'BlueDiary',
+      component: () => import('../views/Pages/BlankPage.vue'),
+      meta: {
+        title: 'Blue Diary',
+        layout: 'public',
+      },
+    },
+    {
+      path: '/campaign/heart',
+      name: 'BlueHeart',
+      component: () => import('../views/Pages/BlankPage.vue'),
+      meta: {
+        title: 'Blue Heart',
+        layout: 'public',
+      },
+    },
 
     // ==================
     // Admin Routes (TailAdmin Dashboard)
