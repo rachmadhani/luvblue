@@ -1,13 +1,13 @@
 <template>
-  <main class="pt-32 pb-24 px-4 min-h-screen" style="background-color: #fdf5d4">
+  <main class="pt-32 pb-24 px-4 min-h-screen" style="background-color: #faf5de">
     <div class="max-w-4xl mx-auto">
       <!-- Hero Section -->
       <section class="text-center mb-20">
         <h1 class="text-5xl md:text-7xl font-serif text-blue-950 mb-8 tracking-tighter leading-tight">
           Small Actions,<br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Create Big Waves.</span>
+          <span style="color: #71ccd4">Create Big Waves.</span>
         </h1>
-        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full mb-12"></div>
+        <div class="w-24 h-1 mx-auto rounded-full mb-12" style="background-color: #71ccd4"></div>
       </section>
 
       <!-- Content Grid -->
