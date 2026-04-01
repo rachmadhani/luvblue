@@ -16,7 +16,7 @@ const navLinks = [
   { 
     name: 'Blue Campaign', 
     children: [
-      { name: 'Blue Heart', to: { name: 'BlueHeart' } }
+      { name: 'Blue Heart', to: { name: 'Home' } }
     ]
   },
   { name: 'Blue Gallery', to: { name: 'Gallery' } },
