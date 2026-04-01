@@ -61,7 +61,7 @@ const router = createRouter({
     {
       path: '/campaign/heart',
       name: 'BlueHeart',
-      component: () => import('../views/Pages/BlankPage.vue'),
+      component: () => HomeView,
       meta: {
         title: 'Blue Heart',
         layout: 'public',
