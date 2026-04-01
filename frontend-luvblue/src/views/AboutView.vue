@@ -1,5 +1,5 @@
 <template>
-  <main class="pt-32 pb-24 px-4 min-h-screen" style="background-color: #faf5de">
+  <main class="pt-32 pb-24 px-4 min-h-screen" style="background-color: #fcfaf0">
     <div class="max-w-4xl mx-auto">
       <!-- Hero Section -->
       <section class="text-center mb-20">
