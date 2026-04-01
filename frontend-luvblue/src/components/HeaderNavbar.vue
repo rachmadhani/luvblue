@@ -20,11 +20,8 @@ const toggleMenu = () => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <!-- Logo -->
-        <RouterLink :to="{ name: 'Home' }" class="flex-shrink-0 flex items-center gap-2">
-          <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center transform rotate-3 shadow-blue-200 shadow-lg">
-            <span class="text-white font-serif text-lg">L</span>
-          </div>
-          <span class="text-blue-950 font-serif text-xl tracking-tight">LUVBLU</span>
+        <RouterLink :to="{ name: 'Home' }" class="flex-shrink-0 flex items-center">
+          <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-36 w-auto object-contain" />
         </RouterLink>
 
         <!-- Desktop Navigation -->
