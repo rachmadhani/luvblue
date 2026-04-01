@@ -73,12 +73,12 @@ const toggleDropdown = (name: string) => {
             </div>
           </template>
 
-          <RouterLink :to="{ name: 'Signin' }" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-blue-100 flex items-center gap-2">
+          <a href="https://www.instagram.com/ashley_luvblu/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-blue-100 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
             Add Moment
-          </RouterLink>
+          </a>
         </div>
 
         <!-- Mobile menu button -->
@@ -125,12 +125,12 @@ const toggleDropdown = (name: string) => {
           </div>
         </template>
         <div class="pt-4 pb-2">
-          <RouterLink :to="{ name: 'Signin' }" @click="isMenuOpen = false" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all shadow-md flex items-center justify-center gap-2">
+          <a href="https://www.instagram.com/ashley_luvblu/" target="_blank" @click="isMenuOpen = false" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all shadow-md flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
             Add Moment
-          </RouterLink>
+          </a>
         </div>
       </div>
     </Transition>

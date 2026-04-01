@@ -3,6 +3,7 @@ import { authService } from '@/services/authService'
 
 // Public layout components
 import HomeView from '../views/HomeView.vue'
+// import Primar
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +19,7 @@ const router = createRouter({
       name: 'Home',
       component: HomeView,
       meta: {
-        title: 'LUVBLU - 500 Blue Hearts',
+        title: 'LUVBLU - Home',
         layout: 'public',
       },
     },

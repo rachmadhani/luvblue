@@ -1,11 +1,11 @@
 <template>
-  <main class="pt-32 pb-24 px-4 min-h-screen bg-white">
+  <main class="pt-32 pb-24 px-4 min-h-screen" style="background-color: #fdf5d4">
     <div class="max-w-4xl mx-auto">
       <!-- Hero Section -->
       <section class="text-center mb-20">
         <h1 class="text-5xl md:text-7xl font-serif text-blue-950 mb-8 tracking-tighter leading-tight">
-          One Heart,<br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">500 Blue Stories.</span>
+          Small Actions,<br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Create Big Waves.</span>
         </h1>
         <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full mb-12"></div>
       </section>
@@ -15,12 +15,12 @@
         <!-- Our Mission -->
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div class="space-y-6">
-            <h2 class="text-3xl font-serif text-blue-900 tracking-tight">Our Mission</h2>
+            <h2 class="text-3xl font-serif text-blue-900 tracking-tight">Our Story</h2>
             <p class="text-slate-600 text-lg leading-relaxed">
-              LUVBLU was born from a simple idea: that collective moments of peace and beauty can create a powerful visual impact. We've dedicated 500 pixels to 500 stories, all united by the color of calm.
+              In our daily lives, it is not easy to completely avoid plastic or disposable products. Still, I believe that even small actions can lead to big change. Something as simple as carrying a tumbler or bringing an eco-bag when shopping can help reduce the use of disposable cups and plastic bags.
             </p>
             <p class="text-slate-600 text-lg leading-relaxed">
-              Every pixel filled represents a moment shared, a memory captured, and a contribution to a larger, living piece of digital art.
+              We may not be able to change everything at once, but small choices and consistent actions can grow into something much bigger. That belief is the reason I started this campaign — to encourage us all to take small steps together and create meaningful change. From Ashely
             </p>
           </div>
           <div class="relative group">
@@ -69,12 +69,16 @@
           <p class="text-slate-600 text-lg mb-10 max-w-xl mx-auto line-clamp-3">
             Your story, your moment, your blue. Help us fill the remaining pixels and complete the message of peace.
           </p>
-          <RouterLink to="/signin" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-full font-bold text-lg transition-all shadow-xl shadow-blue-100 transform hover:scale-105">
+          <a 
+            href="https://www.instagram.com/ashley_luvblu/" 
+            target="_blank"
+            class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-full font-bold text-lg transition-all shadow-xl shadow-blue-100 transform hover:scale-105"
+          >
             Share Your Moment
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
             </svg>
-          </RouterLink>
+          </a>
         </div>
       </div>
     </div>
