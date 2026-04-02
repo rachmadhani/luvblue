@@ -23,6 +23,13 @@ export async function request<T>(path: string, options: RequestInit = {}): Promi
 
   const data = await response.json().catch(() => ({}))
 
+  if (response.status === 401) {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    window.location.href = '/signin'
+    throw new Error('Session expired, please sign in again')
+  }
+
   if (!response.ok) {
     throw new Error(data.message || 'Something went wrong')
   }

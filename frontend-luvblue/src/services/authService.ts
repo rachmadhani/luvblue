@@ -35,7 +35,33 @@ export const authService = {
   },
 
   isLoggedIn() {
-    return !!localStorage.getItem('token')
+    const token = localStorage.getItem('token')
+    if (!token) return false
+
+    try {
+      // Basic JWT decoding to check expiration
+      const parts = token.split('.')
+      if (parts.length !== 3) {
+        this.clearAuth()
+        return false
+      }
+
+      const payload = JSON.parse(atob(parts[1]!))
+      const isExpired = payload.exp * 1000 < Date.now()
+      if (isExpired) {
+        this.clearAuth()
+        return false
+      }
+      return true
+    } catch (e) {
+      this.clearAuth()
+      return false
+    }
+  },
+
+  clearAuth() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
   },
 
   getUser() {
