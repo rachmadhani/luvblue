@@ -9,20 +9,41 @@ const loading = ref(true)
 const selectedPost = ref<any>(null)
 const showModal = ref(false)
 
-const fetchPosts = async () => {
+// Pagination State
+const currentPage = ref(1)
+const totalPages = ref(1)
+const pageSize = 20
+
+const fetchPosts = async (page: number = 1) => {
   loading.value = true
+  currentPage.value = page
   try {
-    const res = await instagramService.getAll(1) as any
+    const res = await instagramService.getAll(page, pageSize) as any
     if (res.success && res.data) {
-      posts.value = Array.isArray(res.data) 
-        ? res.data 
-        : (res.data.data || res.data.rows || [])
+      // Backend returns { data: { data: [...], meta: { last_page: N } } }
+      const responseData = res.data.data || res.data.rows || []
+      posts.value = responseData
+      
+      // Update totals from meta
+      if (res.data.meta) {
+        totalPages.value = res.data.meta.last_page || Math.ceil((res.data.meta.total || 0) / pageSize) || 1
+      }
+    }
+    
+    // Scroll to top of grid area smoothly
+    if (page > 1 || posts.value.length > 0) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   } catch (error) {
     console.error('Failed to fetch gallery:', error)
   } finally {
     loading.value = false
   }
+}
+
+const handlePageChange = (page: number) => {
+  if (page < 1 || page > totalPages.value) return
+  fetchPosts(page)
 }
 
 const openModal = (post: any) => {
@@ -69,26 +90,72 @@ onMounted(fetchPosts)
       </div>
 
       <!-- Posts Grid -->
-      <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div 
-          v-for="post in posts" 
-          :key="post.id"
-          @click="openModal(post)"
-          class="group relative aspect-square bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-slate-100"
-        >
-          <!-- Image -->
-          <img 
-            :src="getImageUrl(post.image_url.split(',')[0].trim())" 
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            alt="Gallery moment"
-          />
-          
-          <!-- Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-              <p class="text-white font-medium">@{{ post.instagram_users?.split(',')[0].trim() || 'Anonymous' }}</p>
-              <p class="text-blue-200 text-xs mt-1">Click to view details</p>
+      <div v-else class="space-y-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div 
+            v-for="post in posts" 
+            :key="post.id"
+            @click="openModal(post)"
+            class="group relative aspect-square bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-slate-100"
+          >
+            <!-- Image -->
+            <img 
+              :src="getImageUrl(post.image_url.split(',')[0].trim())" 
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              alt="Gallery moment"
+            />
+            
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <p class="text-white font-medium">@{{ post.instagram_users?.split(',')[0].trim() || 'Anonymous' }}</p>
+                <p class="text-blue-200 text-xs mt-1">Click to view details</p>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Pagination Bar -->
+        <div v-if="totalPages > 1" class="flex flex-col sm:flex-row items-center justify-center gap-6 py-12 border-t border-slate-100">
+          <div class="flex items-center gap-2">
+            <!-- Previous Button -->
+            <button 
+              @click="handlePageChange(currentPage - 1)"
+              :disabled="currentPage === 1"
+              class="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-blue-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+              aria-label="Previous page"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+
+            <!-- Page Numbers -->
+            <div class="flex items-center gap-1">
+              <button 
+                v-for="page in totalPages" 
+                :key="page"
+                @click="handlePageChange(page)"
+                class="min-w-[40px] h-10 px-2 rounded-xl text-sm font-semibold transition-all"
+                :class="page === currentPage 
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' 
+                  : 'text-slate-500 hover:bg-slate-100 hover:text-blue-600'"
+              >
+                {{ page }}
+              </button>
+            </div>
+
+            <!-- Next Button -->
+            <button 
+              @click="handlePageChange(currentPage + 1)"
+              :disabled="currentPage === totalPages"
+              class="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-blue-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+              aria-label="Next page"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          
+          <div class="text-sm text-slate-400 font-medium">
+            Page {{ currentPage }} of {{ totalPages }}
           </div>
         </div>
       </div>

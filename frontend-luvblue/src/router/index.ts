@@ -60,11 +60,11 @@ const router = createRouter({
       },
     },
     {
-      path: '/campaign/heart',
+      path: '/blue-heart',
       name: 'BlueHeart',
-      component: () => HomeView,
+      component: () => import('../views/BlueHeartView.vue'),
       meta: {
-        title: 'Blue Heart',
+        title: 'Blue Heart - 500 Moments',
         layout: 'public',
       },
     },
