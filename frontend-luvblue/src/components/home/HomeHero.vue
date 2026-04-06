@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 
 const sectionRef = ref<HTMLElement | null>(null)
 const mouse = { x: 0, y: 0 }
+const audioPlayer = ref<HTMLAudioElement | null>(null)
 const layersRef = ref<HTMLElement[]>([])
 
 // Manual positioning for each part to match loveblue_illustration.jpg
@@ -21,6 +22,18 @@ const layers = [
   { id: 'whale_splash', src: '/parallax/loveblue_whale_splash.png', depth: 0.5, style: 'top-[60%] left-[11.8%] w-[21.5%] h-auto', zIndex: 13 },
   { id: 'particles', src: '/parallax/loveblue_particles.png', depth: 0.55, style: 'inset-0 w-full h-full opacity-50 object-cover' },
 ]
+
+const handleAudioEnd = () => {
+  setTimeout(() => {
+    if (audioPlayer.value) {
+      audioPlayer.value.play();
+    }
+  }, 12000);
+}
+
+const startAudio = () => {
+  audioPlayer.value?.play();
+};
 
 const handleMouseMove = (e: MouseEvent) => {
   // Parallax disabled per user request
@@ -134,9 +147,15 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <audio 
+      ref="audioPlayer" 
+      src="/audio/luvblue_theme.mp3" 
+      autoplay 
+      @ended="handleAudioEnd"
+    ></audio>
   <section 
     ref="sectionRef"
-    class="relative w-full h-[56.25vw] min-h-[500px] overflow-hidden bg-[#D8EDF2] mt-24"
+    class="relative w-full h-[56.25vw] min-h-[500px] overflow-hidden bg-[#D8EDF2]"
   >
     <!-- Illustration Layers -->
     <div 
@@ -155,7 +174,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Text Overlay: Refined LUVBLU title -->
-    <div class="absolute inset-x-0 top-0 z-50 flex flex-col items-end justify-start pt-16 md:pt-24 pr-10 md:pr-24 pointer-events-none">
+    <div class="absolute inset-x-0 top-0 z-50 flex flex-col items-end justify-start pt-32 md:pt-40 pr-10 md:pr-24 pointer-events-none">
       <div class="text-right">
         <h1 class="text-7xl md:text-9xl font-serif text-[#1A4B6E] mb-1 drop-shadow-sm opacity-95 tracking-tighter mix-blend-multiply italic">
           LUVBLU
