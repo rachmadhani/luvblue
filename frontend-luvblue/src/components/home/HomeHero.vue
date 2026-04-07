@@ -473,7 +473,7 @@ onUnmounted(() => {
     <!-- Lyrics Display (Bottom Right) -->
     <div 
       v-if="currentLyric"
-      class="absolute bottom-8 right-8 z-[60] max-w-sm md:max-w-md pointer-events-none selection:bg-none"
+      class="absolute bottom-40 right-30 z-[60] max-w-sm md:max-w-md pointer-events-none selection:bg-none"
     >
       <div 
         ref="lyricRef"
