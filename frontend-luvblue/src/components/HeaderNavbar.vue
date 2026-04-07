@@ -38,12 +38,12 @@ const toggleDropdown = (name: string) => {
 </script>
 
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-[100] bg-white/70 backdrop-blur-xl border-b border-blue-100/50">
+  <nav class="fixed top-0 left-0 right-0 z-[100] bg-white/70 backdrop-blur-xl border-b-0 md:border-b md:border-blue-100/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <!-- Logo -->
         <RouterLink :to="{ name: 'Home' }" class="flex-shrink-0 flex items-center">
-          <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-36 w-auto object-contain" />
+          <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-20 md:h-36 w-auto object-contain" />
         </RouterLink>
 
         <!-- Desktop Navigation -->

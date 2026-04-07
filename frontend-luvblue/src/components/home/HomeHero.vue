@@ -9,17 +9,17 @@ const layersRef = ref<HTMLElement[]>([])
 
 // Manual positioning for each part to match loveblue_illustration.jpg
 const layers = [
-  { id: 'sky', src: '/parallax/loveblue_background_sky.png', depth: 0.04, style: 'inset-0 w-full h-full object-cover' },
-  { id: 'clouds', src: '/parallax/loveblue_middleground_clouds.png', depth: 0.08, style: 'inset-0 w-full h-full object-cover' },
-  { id: 'sea', src: '/parallax/loveblue_sea.png', depth: 0.12, style: 'bottom-0 left-0 w-full h-[34.37%] object-cover' },
-  { id: 'small_island_2', src: '/parallax/loveblue_small_island_2.png', depth: 0.15, style: 'top-[92%] left-0 w-[23.6%] h-auto' },
-  { id: 'small_island_1', src: '/parallax/loveblue_small_island_1.png', depth: 0.2, style: 'top-[79%] right-0 w-[41.2%] h-auto' },
-  { id: 'househill', src: '/parallax/loveblue_househill.png', depth: 0.25, style: 'top-[39%] right-0 w-[41.8%] h-auto' },
-  { id: 'lighthouse', src: '/parallax/loveblue_lighthouse.png', depth: 0.3, style: 'top-[26.9%] right-[27.4%] w-[6.8%] h-auto', zIndex: 14 },
-  { id: 'whale_base', src: '/parallax/loveblue_whale_small.png', depth: 0.35, style: 'top-[60%] left-[8.5%] w-[51.1%] h-auto' },
-  { id: 'character', src: '/parallax/loveblue_character.png', depth: 0.4, style: 'top-[55%] left-[39.2%] w-[4.06%] h-auto' },
-  { id: 'whale_jump', src: '/parallax/loveblue_whale.png', depth: 0.45, style: 'top-[25%] left-[13%] w-[30.2%] h-auto', zIndex: 11 },
-  { id: 'whale_splash', src: '/parallax/loveblue_whale_splash.png', depth: 0.5, style: 'top-[60%] left-[11.8%] w-[21.5%] h-auto', zIndex: 13 },
+  { id: 'sky', src: '/parallax/loveblue_background_sky.png', depth: 0.04, style: 'w-full h-auto object-cover' },
+  { id: 'clouds', src: '/parallax/loveblue_middleground_clouds.png', depth: 0.08, style: ' w-full h-full object-cover' },
+  { id: 'sea', src: '/parallax/loveblue_sea.png', depth: 0.12, style: 'inset-0 w-full h-full md:h-[34.37%] md:top-auto md:bottom-0 object-cover' },
+  { id: 'small_island_2', src: '/parallax/loveblue_small_island_2.png', depth: 0.15, style: 'top-[95%] md:top-[92%] left-0 w-[40%] md:w-[23.6%] h-auto' },
+  { id: 'small_island_1', src: '/parallax/loveblue_small_island_1.png', depth: 0.2, style: 'top-[85%] md:top-[79%] right-0 w-[60%] md:w-[41.2%] h-auto' },
+  { id: 'househill', src: '/parallax/loveblue_househill.png', depth: 0.25, style: 'top-[45%] md:top-[39%] right-0 w-[60%] md:w-[41.8%] h-auto' },
+  { id: 'lighthouse', src: '/parallax/loveblue_lighthouse.png', depth: 0.3, style: 'top-[22%] md:top-[26.9%] right-[5%] md:right-[27.4%] w-[15%] md:w-[6.8%] h-auto', zIndex: 14 },
+  { id: 'whale_base', src: '/parallax/loveblue_whale_small.png', depth: 0.35, style: 'top-[50%] md:top-[60%] left-[-10%] md:left-[8.5%] w-[120%] md:w-[51.1%] h-auto' },
+  { id: 'character', src: '/parallax/loveblue_character.png', depth: 0.4, style: 'top-[46%] md:top-[55%] left-[48%] md:left-[39.2%] w-[8%] md:w-[4.06%] h-auto' },
+  { id: 'whale_jump', src: '/parallax/loveblue_whale.png', depth: 0.45, style: 'top-[18%] md:top-[25%] left-[5%] md:left-[13%] w-[60%] md:w-[30.2%] h-auto', zIndex: 11 },
+  { id: 'whale_splash', src: '/parallax/loveblue_whale_splash.png', depth: 0.5, style: 'top-[50%] md:top-[60%] left-[0%] md:left-[11.8%] w-[40%] md:w-[21.5%] h-auto', zIndex: 13 },
   { id: 'particles', src: '/parallax/loveblue_particles.png', depth: 0.55, style: 'inset-0 w-full h-full opacity-50 object-cover' },
 ]
 
@@ -149,17 +149,18 @@ onUnmounted(() => {
 <template>
   <audio 
       ref="audioPlayer" 
-      src="/audio/luvblue_theme.mp3" 
+      
       autoplay 
       @ended="handleAudioEnd"
     ></audio>
   <section 
     ref="sectionRef"
-    class="relative w-full h-[56.25vw] min-h-[500px] overflow-hidden bg-[#D8EDF2]"
+    class="hero-section relative w-full h-[120vw] md:h-[56.25vw] min-h-[500px] md:min-h-[600px] overflow-hidden bg-[#5FBFCA]"
   >
     <!-- Illustration Layers -->
     <div 
       v-for="(layer, index) in layers" 
+      :id="layer.id"
       :key="layer.id"
       :ref="el => { if (el) layersRef[index] = el as HTMLElement }"
       class="absolute pointer-events-none"
@@ -174,19 +175,19 @@ onUnmounted(() => {
     </div>
 
     <!-- Text Overlay: Refined LUVBLU title -->
-    <div class="absolute inset-x-0 top-0 z-50 flex flex-col items-end justify-start pt-32 md:pt-40 pr-10 md:pr-24 pointer-events-none">
-      <div class="text-right">
-        <h1 class="text-7xl md:text-9xl font-serif text-[#1A4B6E] mb-1 drop-shadow-sm opacity-95 tracking-tighter mix-blend-multiply italic">
+    <div class="absolute inset-x-0 top-0 z-50 flex flex-col items-center md:items-end justify-start pt-24 md:pt-40 px-6 md:pr-24 pointer-events-none">
+      <div class="text-right flex flex-col items-center md:items-end">
+        <h1 class="hidden md:block text-7xl md:text-9xl font-serif text-[#1A4B6E] mb-1 drop-shadow-sm opacity-95 tracking-tighter mix-blend-multiply italic">
           LUVBLU
         </h1>
-        <p class="text-xl md:text-2xl text-blue-800 font-medium tracking-tight mb-8">
-          One Heart, 500 Blue Stories.
+        <p class="hidden md:block text-xl md:text-2xl text-blue-800 font-medium tracking-tight mb-8">
+          Small actions, Create Big Waves.
         </p>
-        <div class="flex gap-4 justify-end pointer-events-auto">
+        <div class="flex gap-4 justify-center md:justify-end pointer-events-auto">
           <RouterLink to="/gallery" class="bg-blue-600/90 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-xl backdrop-blur-sm">
             Explore Gallery
           </RouterLink>
-          <RouterLink to="/about" class="bg-white/80 hover:bg-white text-blue-600 px-8 py-3 rounded-full font-bold transition-all shadow-lg backdrop-blur-md border border-blue-100">
+          <RouterLink to="/about" class="hidden md:inline-block bg-white/80 hover:bg-white text-blue-600 px-8 py-3 rounded-full font-bold transition-all shadow-lg backdrop-blur-md border border-blue-100">
             Our Story
           </RouterLink>
         </div>
@@ -201,5 +202,23 @@ onUnmounted(() => {
 <style scoped>
 section {
   user-select: none;
+}
+
+@media (max-width: 767px) {
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 400px;
+    /* height: 120px; */
+    background-color: #5FBFCA;
+    z-index: 11;
+    pointer-events: none;
+  }
+  .hero-section #sky {
+    width: 500px;
+  }
 }
 </style>
