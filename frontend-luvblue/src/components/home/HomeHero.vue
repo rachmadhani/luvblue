@@ -141,6 +141,93 @@ onMounted(() => {
   // window.addEventListener('mousemove', handleMouseMove)
 })
 
+const lyricsData = [
+  {
+    startTime: 33,
+    endTime: 92,
+    text: "The morning wakes in a shade of pale... A fragile world behind a misty veil... I hear the heartbeat of the deep blue sea... Whispering secrets of how it used to be... Soft as a feather, the wind begins to sigh... Searching for clarity in a clouded sky... Every breath we take is a gift from the green... Every drop of life in the rivers unseen... It’s time to listen, it’s time to feel... The spirit of the earth, so pure and real"
+  },
+  {
+    startTime: 93,
+    endTime: 137,
+    text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
+  },
+  {
+    startTime: 138,
+    endTime: 169,
+    text: "Golden sands and the emerald trees... Dancing slow in the cooling breeze... But shadows linger where the plastic flows... A silent ache that the mountain knows... Let’s heal the scars with a gentle hand... To bring the magic back to the land"
+  },
+  {
+    startTime: 170,
+    endTime: 196,
+    text: "It’s not too late to change the flow... To let the ancient forests grow... A simple choice, a kinder way... To save the dawn of a brand new day... Grace in our steps, love in our soul"
+  },
+  {
+    startTime: 197,
+    endTime: 239,
+    text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
+  },
+  {
+    startTime: 240,
+    endTime: 260,
+    text: "Keep it blue... keep it pure... LoveBlue..."
+  }
+]
+
+const currentLyric = ref("")
+const lyricRef = ref<HTMLElement | null>(null)
+const isAnimating = ref(false)
+
+const handleTimeUpdate = (e: Event) => {
+  const time = (e.target as HTMLAudioElement).currentTime
+  const activeLyric = lyricsData.find(l => time >= l.startTime && time < l.endTime)
+  
+  if (activeLyric && activeLyric.text !== currentLyric.value && !isAnimating.value) {
+    isAnimating.value = true
+    if (lyricRef.value && currentLyric.value !== "") {
+      // Fade out then in
+      gsap.to(lyricRef.value, {
+        opacity: 0,
+        y: -10,
+        duration: 0.6,
+        ease: "power2.inOut",
+        onComplete: () => {
+          currentLyric.value = activeLyric.text
+          gsap.fromTo(lyricRef.value, 
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", onComplete: () => { isAnimating.value = false } }
+          )
+        }
+      })
+    } else {
+      currentLyric.value = activeLyric.text
+      // Small delay to ensure DOM update
+      setTimeout(() => {
+        if (lyricRef.value) {
+          gsap.fromTo(lyricRef.value, 
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", onComplete: () => { isAnimating.value = false } }
+          )
+        } else {
+          isAnimating.value = false
+        }
+      }, 50)
+    }
+  } else if (!activeLyric && currentLyric.value !== "" && !isAnimating.value) {
+    isAnimating.value = true
+    gsap.to(lyricRef.value, {
+      opacity: 0,
+      y: -10,
+      duration: 0.6,
+      ease: "power2.inOut",
+      onComplete: () => {
+        currentLyric.value = ""
+        isAnimating.value = false
+      }
+    })
+  }
+}
+
 onUnmounted(() => {
   // window.removeEventListener('mousemove', handleMouseMove)
 })
@@ -149,9 +236,10 @@ onUnmounted(() => {
 <template>
   <audio 
       ref="audioPlayer" 
-      
+      src="/audio/luvblue_theme.mp3"
       autoplay 
       @ended="handleAudioEnd"
+      @timeupdate="handleTimeUpdate"
     ></audio>
   <section 
     ref="sectionRef"
@@ -196,6 +284,21 @@ onUnmounted(() => {
 
     <!-- Minimal Bottom Fade -->
     <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent z-[25] pointer-events-none"></div>
+
+    <!-- Lyrics Display (Bottom Right) -->
+    <div 
+      v-if="currentLyric"
+      class="absolute bottom-8 right-8 z-[60] max-w-sm md:max-w-md pointer-events-none selection:bg-none"
+    >
+      <div 
+        ref="lyricRef"
+        class="text-right"
+      >
+        <p class="text-lg md:text-xl font-medium text-[#1A4B6E]/90 italic leading-relaxed tracking-tight drop-shadow-sm whitespace-pre-line">
+          {{ currentLyric }}
+        </p>
+      </div>
+    </div>
   </section>
 </template>
 
