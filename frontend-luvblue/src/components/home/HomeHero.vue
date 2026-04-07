@@ -141,38 +141,223 @@ onMounted(() => {
   // window.addEventListener('mousemove', handleMouseMove)
 })
 
+// const lyricsData = [
+//   {
+//     startTime: 33,
+//     endTime: 92,
+//     text: "The morning wakes in a shade of pale... A fragile world behind a misty veil... I hear the heartbeat of the deep blue sea... Whispering secrets of how it used to be... Soft as a feather, the wind begins to sigh... Searching for clarity in a clouded sky... Every breath we take is a gift from the green... Every drop of life in the rivers unseen... It’s time to listen, it’s time to feel... The spirit of the earth, so pure and real"
+//   },
+//   {
+//     startTime: 93,
+//     endTime: 137,
+//     text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
+//   },
+//   {
+//     startTime: 138,
+//     endTime: 169,
+//     text: "Golden sands and the emerald trees... Dancing slow in the cooling breeze... But shadows linger where the plastic flows... A silent ache that the mountain knows... Let’s heal the scars with a gentle hand... To bring the magic back to the land"
+//   },
+//   {
+//     startTime: 170,
+//     endTime: 196,
+//     text: "It’s not too late to change the flow... To let the ancient forests grow... A simple choice, a kinder way... To save the dawn of a brand new day... Grace in our steps, love in our soul"
+//   },
+//   {
+//     startTime: 197,
+//     endTime: 239,
+//     text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
+//   },
+//   {
+//     startTime: 240,
+//     endTime: 260,
+//     text: "Keep it blue... keep it pure... LoveBlue..."
+//   }
+// ]
+
 const lyricsData = [
   {
     startTime: 33,
-    endTime: 92,
-    text: "The morning wakes in a shade of pale... A fragile world behind a misty veil... I hear the heartbeat of the deep blue sea... Whispering secrets of how it used to be... Soft as a feather, the wind begins to sigh... Searching for clarity in a clouded sky... Every breath we take is a gift from the green... Every drop of life in the rivers unseen... It’s time to listen, it’s time to feel... The spirit of the earth, so pure and real"
+    endTime: 36,
+    text: "The morning wakes in a shade of pale ..."
   },
   {
+    startTime: 36,
+    endTime: 40,
+    text: "A fragile world behind a misty veil..."
+  },
+  {
+    startTime: 41,
+    endTime: 48,
+    text: "I hear the heartbeat of the deep blue sea..."
+  },
+  {
+    startTime: 49,
+    endTime: 52,
+    text: "Whispering secrets of how it used to be..."
+  },
+  {
+    startTime: 53,
+    endTime: 56,
+    text: "Soft as a feather, the wind begins to sigh..."
+  },
+  {
+    startTime: 57,
+    endTime: 63,
+    text: "Searching for clarity in a clouded sky..."
+  },
+  {
+    startTime: 64,
+    endTime: 71,
+    text: "Every breath we take is a gift from the green..."
+  },
+  {
+    startTime: 72,
+    endTime: 80,
+    text: "Every drop of life in the rivers unseen..."
+  },
+  {
+    startTime: 81,
+    endTime: 84,
+    text: "It’s time to listen, it’s time to feel..."
+  },
+  {
+    startTime: 85,
+    endTime: 92,
+    text: "The spirit of the earth, so pure and real..."
+  },
+  
+  {
     startTime: 93,
+    endTime: 103,
+    text: "LoveBlue, oh, LoveBlue..."
+  },
+  {
+    startTime: 104,
+    endTime: 108,
+    text: "A sapphire dream we’re holding onto..."
+  },
+  {
+    startTime: 109,
+    endTime: 113,
+    text: "Underneath the velvet sky so wide..."
+  },
+  {
+    startTime: 114,
+    endTime: 118,
+    text: "Keep the light of the stars alive..."
+  },
+  {
+    startTime: 119,
+    endTime: 127,
+    text: "LoveBlue, with every beat of our heart..."
+  },
+  {
+    startTime: 128,
     endTime: 137,
-    text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
+    text: "For a world that shall never fall apart..."
   },
   {
     startTime: 138,
+    endTime: 141,
+    text: "Golden sands and the emerald trees..."
+  },
+  {
+    startTime: 142,
+    endTime: 145,
+    text: "Dancing slow in the cooling breeze..."
+  },
+  {
+    startTime: 146,
+    endTime: 153,
+    text: "But shadows linger where the plastic flows..."
+  },
+  {
+    startTime: 154,
+    endTime: 156,
+    text: "A silent ache that the mountain knows..."
+  },
+  {
+    startTime: 157,
+    endTime: 162,
+    text: "Let’s heal the scars with a gentle hand..."
+  },
+  {
+    startTime: 163,
     endTime: 169,
-    text: "Golden sands and the emerald trees... Dancing slow in the cooling breeze... But shadows linger where the plastic flows... A silent ache that the mountain knows... Let’s heal the scars with a gentle hand... To bring the magic back to the land"
+    text: "To bring the magic back to the land..."
   },
   {
-    startTime: 170,
-    endTime: 196,
-    text: "It’s not too late to change the flow... To let the ancient forests grow... A simple choice, a kinder way... To save the dawn of a brand new day... Grace in our steps, love in our soul"
+    startTime: 172,
+    endTime: 174,
+    text: "It’s not too late to change the flow..."
   },
   {
-    startTime: 197,
-    endTime: 239,
-    text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
+    startTime: 175,
+    endTime: 178,
+    text: "To let the ancient forests grow..."
   },
   {
-    startTime: 240,
-    endTime: 260,
-    text: "Keep it blue... keep it pure... LoveBlue..."
+    startTime: 179,
+    endTime: 183,
+    text: "A simple choice, a kinder way..."
+  },
+  {
+    startTime: 184,
+    endTime: 187,
+    text: "To save the dawn of a brand new day..."
+  },
+  {
+    startTime: 188,
+    endTime: 195,
+    text: "Grace in our steps, love in our soul..."
+  },
+  {
+    startTime: 196,
+    endTime: 206,
+    text: "LoveBlue, oh, LoveBlue..."
+  },
+  {
+    startTime: 207,
+    endTime: 211,
+    text: "A sapphire dream we’re holding onto..."
+  },
+  {
+    startTime: 212,
+    endTime: 216,
+    text: "Underneath the velvet sky so wide..."
+  },
+  {
+    startTime: 217,
+    endTime: 221,
+    text: "Keep the light of the stars alive..."
+  },
+  {
+    startTime: 222,
+    endTime: 230,
+    text: "LoveBlue, with every beat of our heart..."
+  },
+  {
+    startTime: 231,
+    endTime: 240,
+    text: "For a world that shall never fall apart..."
+  },
+  {
+    startTime: 243,
+    endTime: 244,
+    text: "Keep it blue...  LoveBlue..."
+  },
+  {
+    startTime: 245,
+    endTime: 247,
+    text: "Keep it pure..."
+  },
+  {
+    startTime: 248,
+    endTime: 256,
+    text: "LoveBlue...."
   }
 ]
+
 
 const currentLyric = ref("")
 const lyricRef = ref<HTMLElement | null>(null)
