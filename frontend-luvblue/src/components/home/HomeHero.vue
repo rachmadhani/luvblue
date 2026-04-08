@@ -470,16 +470,15 @@ onUnmounted(() => {
     <!-- Minimal Bottom Fade -->
     <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent z-[25] pointer-events-none"></div>
 
-    <!-- Lyrics Display (Bottom Right) -->
     <div 
       v-if="currentLyric"
-      class="absolute bottom-40 right-30 z-[60] max-w-sm md:max-w-md pointer-events-none selection:bg-none"
+      class="absolute bottom-40 right-8 md:right-24 z-[60] max-w-xl md:max-w-4xl pointer-events-none selection:bg-none"
     >
       <div 
         ref="lyricRef"
         class="text-right"
       >
-        <p class="text-lg md:text-xl font-medium text-[#1A4B6E]/90 italic leading-relaxed tracking-tight drop-shadow-sm whitespace-pre-line">
+        <p class="text-xl md:text-3xl font-bold text-[#1A4B6E] italic leading-tight tracking-tighter drop-shadow-md whitespace-pre-line">
           {{ currentLyric }}
         </p>
       </div>
