@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { gsap } from 'gsap'
 
 const sectionRef = ref<HTMLElement | null>(null)
 const mouse = { x: 0, y: 0 }
 const audioPlayer = ref<HTMLAudioElement | null>(null)
 const layersRef = ref<HTMLElement[]>([])
+const speechBubbleRef = ref<HTMLElement | null>(null)
 
 // Manual positioning for each part to match loveblue_illustration.jpg
 const layers = [
@@ -83,7 +84,7 @@ onMounted(() => {
   const charIdx = layers.findIndex(l => l.id === 'character')
   
   if (layersRef.value[whaleBaseIdx]) {
-    gsap.to([layersRef.value[whaleBaseIdx], layersRef.value[charIdx]], {
+    gsap.to([layersRef.value[whaleBaseIdx], layersRef.value[charIdx], speechBubbleRef.value], {
       y: '+=5',
       duration: 3,
       repeat: -1,
@@ -369,41 +370,64 @@ const handleTimeUpdate = (e: Event) => {
   
   if (activeLyric && activeLyric.text !== currentLyric.value && !isAnimating.value) {
     isAnimating.value = true
+
+    // Kill any in-progress animations on this element
+    if (lyricRef.value) {
+      gsap.killTweensOf(lyricRef.value)
+    }
+
     if (lyricRef.value && currentLyric.value !== "") {
-      // Fade out then in
+      // Fade out current lyric, then fade in new one
       gsap.to(lyricRef.value, {
         opacity: 0,
         y: -10,
-        duration: 0.6,
+        duration: 0.4,
         ease: "power2.inOut",
         onComplete: () => {
           currentLyric.value = activeLyric.text
-          gsap.fromTo(lyricRef.value, 
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", onComplete: () => { isAnimating.value = false } }
-          )
+          // Ensure opacity is 0 before the new text renders
+          if (lyricRef.value) {
+            gsap.set(lyricRef.value, { opacity: 0, y: 10 })
+          }
+          nextTick(() => {
+            if (lyricRef.value) {
+              gsap.to(lyricRef.value, {
+                opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+                onComplete: () => { isAnimating.value = false }
+              })
+            } else {
+              isAnimating.value = false
+            }
+          })
         }
       })
     } else {
+      // First lyric appearance — set hidden before updating text
+      if (lyricRef.value) {
+        gsap.set(lyricRef.value, { opacity: 0, y: 10 })
+      }
       currentLyric.value = activeLyric.text
-      // Small delay to ensure DOM update
-      setTimeout(() => {
+      nextTick(() => {
         if (lyricRef.value) {
-          gsap.fromTo(lyricRef.value, 
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", onComplete: () => { isAnimating.value = false } }
-          )
+          gsap.set(lyricRef.value, { opacity: 0, y: 10 })
+          gsap.to(lyricRef.value, {
+            opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+            onComplete: () => { isAnimating.value = false }
+          })
         } else {
           isAnimating.value = false
         }
-      }, 50)
+      })
     }
   } else if (!activeLyric && currentLyric.value !== "" && !isAnimating.value) {
     isAnimating.value = true
+    if (lyricRef.value) {
+      gsap.killTweensOf(lyricRef.value)
+    }
     gsap.to(lyricRef.value, {
       opacity: 0,
       y: -10,
-      duration: 0.6,
+      duration: 0.4,
       ease: "power2.inOut",
       onComplete: () => {
         currentLyric.value = ""
@@ -470,15 +494,17 @@ onUnmounted(() => {
     <!-- Minimal Bottom Fade -->
     <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent z-[25] pointer-events-none"></div>
 
+    <!-- Character Speech Bubble (Desktop Focused) -->
     <div 
       v-if="currentLyric"
-      class="absolute bottom-40 right-8 md:right-24 z-[60] max-w-xl md:max-w-4xl pointer-events-none selection:bg-none"
+      ref="speechBubbleRef"
+      class="absolute z-[60] pointer-events-none transition-all duration-300 top-[45%] left-[41%] translate-x-[-50%] hidden md:flex items-center justify-center"
     >
       <div 
         ref="lyricRef"
-        class="text-right"
+        class="speech-bubble"
       >
-        <p class="text-xl md:text-3xl font-bold text-[#1A4B6E] italic leading-tight tracking-tighter drop-shadow-md whitespace-pre-line">
+        <p class="speech-text">
           {{ currentLyric }}
         </p>
       </div>
@@ -491,6 +517,58 @@ section {
   user-select: none;
 }
 
+.speech-bubble {
+  position: relative;
+  background: #ffffff;
+  border: 3px solid #2a2a2a;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(3px 4px 0 rgba(0,0,0,0.12));
+  image-rendering: pixelated;
+}
+
+/* Tail border (outer) */
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 18px solid #2a2a2a;
+}
+
+/* Tail fill (inner) */
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 14px solid #ffffff;
+}
+
+.speech-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1A4B6E;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  padding: 14px 28px;
+  margin: 0;
+}
+
 @media (max-width: 767px) {
   .hero-section::before {
     content: "";
@@ -499,7 +577,7 @@ section {
     left: 0;
     right: 0;
     width: 400px;
-    /* height: 120px; */
+    height: 120px;
     background-color: #5FBFCA;
     z-index: 11;
     pointer-events: none;
