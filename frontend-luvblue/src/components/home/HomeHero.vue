@@ -13,14 +13,14 @@ const overlayRef = ref<HTMLElement | null>(null)
 const layers = [
   { id: 'sky', src: '/parallax/loveblue_background_sky.png', depth: 0.04, style: 'w-full h-auto object-cover' },
   { id: 'clouds', src: '/parallax/loveblue_middleground_clouds.png', depth: 0.08, style: 'w-full h-full object-cover' },
-  { id: 'sea', src: '/parallax/loveblue_sea.png', depth: 0.12, style: 'inset-0 w-full h-[34.37%] top-auto bottom-0 object-cover' },
-  { id: 'small_island_2', src: '/parallax/loveblue_small_island_2.png', depth: 0.15, style: 'top-[92%] left-0 w-[23.6%] h-auto' },
+  { id: 'sea', src: '/parallax/loveblue_sea.png', depth: 0.12, style: 'sea-layer inset-0 w-full h-[34.37%] top-auto bottom-0 object-cover' },
+  { id: 'small_island_2', src: '/parallax/loveblue_small_island_2.png', depth: 0.15, style: 'small-island-2-layer top-[92%] left-0 w-[23.6%] h-auto' },
   { id: 'small_island_1', src: '/parallax/loveblue_small_island_1.png', depth: 0.2, style: 'small-island-1-layer top-[79%] right-0 w-[41.2%] h-auto' },
   { id: 'househill', src: '/parallax/loveblue_househill.png', depth: 0.25, style: 'househill-layer right-0 w-[41.8%] h-auto' },
   { id: 'lighthouse', src: '/parallax/loveblue_lighthouse.png', depth: 0.3, style: 'lighthouse-layer top-[26.9%] right-[27.4%] w-[6.8%] h-auto', zIndex: 14 },
-  { id: 'whale_base', src: '/parallax/loveblue_whale_small.png', depth: 0.35, style: 'top-[60%] left-[8.5%] w-[51.1%] h-auto' },
-  { id: 'character', src: '/parallax/loveblue_character.png', depth: 0.4, style: 'top-[55%] left-[39.2%] w-[4.06%] h-auto' },
-  { id: 'whale_jump', src: '/parallax/loveblue_whale.png', depth: 0.45, style: 'top-[25%] left-[13%] w-[30.2%] h-auto', zIndex: 11 },
+  { id: 'whale_base', src: '/parallax/loveblue_whale_small.png', depth: 0.35, style: 'whale-small-layer top-[60%] left-[8.5%] w-[51.1%] h-auto' },
+  { id: 'character', src: '/parallax/loveblue_character.png', depth: 0.4, style: 'character-layer top-[55%] left-[39.2%] w-[4.06%] h-auto' },
+  { id: 'whale_jump', src: '/parallax/loveblue_whale.png', depth: 0.45, style: 'whale-jump-layer top-[25%] left-[13%] w-[30.2%] h-auto', zIndex: 11 },
   { id: 'whale_splash', src: '/parallax/loveblue_whale_splash.png', depth: 0.5, style:'whale-splash-layer top-[60%] left-[11.8%] w-[21.5%] h-auto', zIndex: 13 },
   { id: 'particles', src: '/parallax/loveblue_particles.png', depth: 0.55, style: 'inset-0 w-full h-full opacity-50 object-cover' },
 ]
@@ -504,14 +504,14 @@ onUnmounted(() => {
     </div>
 
     <!-- Minimal Bottom Fade -->
-    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent z-[25] pointer-events-none"></div>
+    <div class="absolute inset-x-0 bottom-0 h-16 md:h-32 bg-gradient-to-t from-white to-transparent z-[25] pointer-events-none"></div>
 
     <!-- Character Speech Bubble -->
     <div 
       v-if="currentLyric"
       ref="speechBubbleRef"
       class="absolute z-[60] pointer-events-none transition-all duration-300
-             top-[45%] left-[44%] translate-x-[-50%]
+             top-[50%] left-[44%] translate-x-[-50%]
              md:top-[45%] md:left-[41%]
              flex items-center justify-center"
     >
@@ -584,7 +584,7 @@ section {
   margin: 0;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 760px) {
   .speech-text {
     font-size: 0.5rem;
     padding: 5px 10px;
@@ -613,13 +613,33 @@ section {
   top: 39%;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .househill-layer {
     top: 50%;
   }
 
+  .sea-layer img {
+    object-position: bottom !important;
+  }
+
   .small-island-1-layer {
-    top: 83%;
+    top: 84%;
+  }
+
+  .small-island-2-layer {
+    top: 93%;
+  }
+  
+  .whale-small-layer {
+    top: 65%;
+  }
+
+  .character-layer {
+     top: 61%;
+  }
+
+  .whale-jump-layer {
+    top: 30%;
   }
 
   .lighthouse-layer {
@@ -627,7 +647,46 @@ section {
   }
 
   .whale-splash-layer {
-    top: 64%;
+    top: 69%;
   }
 }
+
+@media screen and (max-width: 360px) and (max-height: 780px) {
+  .househill-layer {
+    top: 53%;
+  }
+
+  .whale-small-layer {
+    top: 67%;
+  }
+
+  .small-island-1-layer {
+    top: 86%;
+  }
+
+  .small-island-2-layer {
+    top: 94%;
+  }
+
+  .lighthouse-layer {
+    top: 45%;
+  }
+  .whale-splash-layer {
+    top: 72%;
+  }
+
+  .whale-jump-layer {
+    top: 35%;
+  }
+
+  .character-layer {
+     top: 63%;
+  }
+
+  .sea-layer {
+    height: 45%;
+    bottom: 0;
+  }
+}
+
 </style>
