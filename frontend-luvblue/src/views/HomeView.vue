@@ -3,7 +3,7 @@ import HomeHero from '@/components/home/HomeHero.vue'
 </script>
 
 <template>
-  <main class="min-h-screen">
+  <main>
     <!-- Parallax Hero Section -->
     <HomeHero />
   </main>
