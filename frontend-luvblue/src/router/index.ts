@@ -157,6 +157,12 @@ const router = createRouter({
       meta: { title: 'Instagram Management' },
     },
     {
+      path: '/admin/diary',
+      name: 'Diary Management',
+      component: () => import('../views/Diary/DiaryManagement.vue'),
+      meta: { title: 'Diary Management' },
+    },
+    {
       path: '/admin/blank',
       name: 'Blank',
       component: () => import('../views/Pages/BlankPage.vue'),

@@ -255,6 +255,11 @@ const menuGroups = [
         name: "Instagram",
         path: "/admin/instagram",
       },
+      {
+        icon: DocsIcon,
+        name: "Diary",
+        path: "/admin/diary",
+      },
     ],
   },
 ];
