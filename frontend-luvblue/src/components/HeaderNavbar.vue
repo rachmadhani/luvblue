@@ -43,7 +43,7 @@ const toggleDropdown = (name: string) => {
       <div class="flex justify-between items-center h-20">
         <!-- Logo -->
         <RouterLink :to="{ name: 'Home' }" class="flex-shrink-0 flex items-center">
-          <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-20 md:h-36 w-auto object-contain" />
+          <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-20 md:h-36 w-auto object-contain" loading="eager" />
         </RouterLink>
 
         <!-- Desktop Navigation -->

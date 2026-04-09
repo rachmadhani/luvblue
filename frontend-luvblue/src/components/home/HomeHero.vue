@@ -477,6 +477,7 @@ onUnmounted(() => {
         :src="layer.src" 
         :alt="layer.id"
         class="w-full h-full object-contain mix-blend-multiply"
+        loading="eager"
       />
     </div>
 

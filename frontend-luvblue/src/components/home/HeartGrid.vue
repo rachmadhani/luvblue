@@ -226,7 +226,7 @@ onMounted(() => {
           </button>
 
           <div class="aspect-square w-full bg-slate-100">
-            <img :src="selectedPixel.displayImage" class="w-full h-full object-cover" />
+            <img :src="selectedPixel.displayImage" class="w-full h-full object-cover" loading="lazy" />
           </div>
 
           <div class="p-6">

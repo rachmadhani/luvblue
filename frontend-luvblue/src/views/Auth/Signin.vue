@@ -10,7 +10,7 @@
               to="/"
               class="inline-flex items-center gap-2 group transition-all"
             >
-              <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-36 w-auto object-contain" />
+              <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-36 w-auto object-contain" loading="lazy" />
             </router-link>
           </div>
           <div class="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
@@ -130,7 +130,7 @@
           
           <div class="relative flex flex-col items-center justify-center w-full p-12 text-center z-10">
             <div class="mb-12">
-               <img src="/logo/LUVBLU_Logo_transparend.png" alt="LUVBLU Logo" class="h-42 w-auto object-contain mx-auto mb-6 drop-shadow-2xl" />
+               <img src="/logo/LUVBLU_Logo_transparend.png" alt="LUVBLU Logo" class="h-42 w-auto object-contain mx-auto mb-6 drop-shadow-2xl" loading="lazy" />
                <h2 class="text-white font-serif text-4xl mb-4 leading-tight">Every blue moment<br/><span class="italic">fills our heart.</span></h2>
                <p class="text-blue-200/80 max-w-sm mx-auto font-light leading-relaxed">
                  Join 5,000+ members in sharing the beauty of our blue world through photos and moments.

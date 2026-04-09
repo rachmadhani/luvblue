@@ -1,6 +1,6 @@
 <template>
   <div :class="['relative rounded-full', sizeClasses[size]]">
-    <img :src="src" :alt="alt" class="object-cover rounded-full" />
+    <img :src="src" :alt="alt" class="object-cover rounded-full" loading="lazy" />
     <span
       v-if="status !== 'none'"
       :class="[

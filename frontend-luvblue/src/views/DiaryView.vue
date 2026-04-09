@@ -10,7 +10,7 @@ import { BookOpen, ArrowRight } from 'lucide-vue-next'
         <BookOpen :size="14" />
         <span>MY BLUE DIARY</span>
       </div>
-      <h1 class="font-script text-5xl md:text-6xl text-[#1e293b] mb-6">
+      <h1 class="font-script text-5xl md:text-6xl text-[#1e293b] mb-6 leading-tight">
         Turning small daily moments into  <span style="color: #71ccd4">my own blue stories</span> 
       </h1>
       <!-- <p class="italic text-gray-500 text-lg">

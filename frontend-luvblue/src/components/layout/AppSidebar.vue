@@ -35,6 +35,7 @@
           alt="Logo"
           width="150"
           height="40"
+          loading="lazy"
         />
         <img
           v-else
@@ -42,6 +43,7 @@
           alt="Logo"
           width="32"
           height="32"
+          loading="lazy"
         />
       </router-link>
     </div>

@@ -103,6 +103,7 @@ onMounted(fetchPosts)
               :src="getImageUrl(post.image_url.split(',')[0].trim())" 
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               alt="Gallery moment"
+              loading="lazy"
             />
             
             <!-- Overlay -->
@@ -170,6 +171,7 @@ onMounted(fetchPosts)
             :src="getImageUrl(selectedPost.image_url.split(',')[0].trim())" 
             class="w-full h-full object-cover"
             alt="Shared moment"
+            loading="lazy"
           />
         </div>
         
