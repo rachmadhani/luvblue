@@ -53,7 +53,7 @@ const router = createRouter({
     {
       path: '/diary',
       name: 'BlueDiary',
-      component: () => import('../views/Pages/BlankPage.vue'),
+      component: () => import('../views/DiaryView.vue'),
       meta: {
         title: 'Blue Diary',
         layout: 'public',
