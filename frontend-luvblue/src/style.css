@@ -17,5 +17,7 @@ body {
 }
 
 .font-script {
-  font-family: var(--font-script);
+  /* font-family: var(--font-script);
+   */
+  font-family: var(--font-serif)
 }

@@ -4,9 +4,17 @@
       <!-- Public pages get HeaderNavbar, admin pages use AdminLayout via router -->
       <div v-if="isPublicRoute" class="min-h-screen bg-blue-50/30">
         <HeaderNavbar />
-        <RouterView />
+        <RouterView v-slot="{ Component }">
+          <Transition :name="route.name === 'Home' ? '' : 'page-fade'" mode="out-in" appear>
+            <component :is="Component" :key="route.path" />
+          </Transition>
+        </RouterView>
       </div>
-      <RouterView v-else />
+      <RouterView v-else v-slot="{ Component }">
+        <Transition name="page-fade" mode="out-in" appear>
+          <component :is="Component" :key="route.path" />
+        </Transition>
+      </RouterView>
     </SidebarProvider>
   </ThemeProvider>
 </template>
@@ -30,5 +38,15 @@ const isPublicRoute = computed(() => {
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.page-fade-enter-from,
+.page-fade-leave-to {
+  opacity: 0;
 }
 </style>
