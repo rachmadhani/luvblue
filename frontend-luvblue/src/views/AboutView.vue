@@ -94,26 +94,25 @@ onMounted(() => {
           <!-- Text -->
           <div class="reveal-manual" ref="textCol">
             <div class="section-tag">My Story</div>
-            <h2 class="section-title font-caveat">
+            <h2 class="section-title font-serif">
               Those who feel<br>
               beauty are the ones<br>
               who <span style="color: #3A9E9A;">protect it.</span>
             </h2>
             <p class="section-body font-batang">
+              There are many ways to talk about the environment. I am not expecting some huge change. I simply want people to experience nature as it is, because I believe the world begins to change when people fall in love with it.
+            </p>
+            <p class="section-body font-batang">
               I'm someone who tears up at the sight of ocean sunsets, who stops walking just to listen to cherry blossoms
               fall. The day I realized that beauty might disappear — that's when LUVBLU began.
             </p>
-            <p class="section-body font-batang">
-              There are many ways to talk about the environment. I choose to write love letters. Not campaigns — diaries.
-              Not lectures — feelings. Because I believe the world changes when people fall in love with it first.
-            </p>
 
             <div class="meaning-row">
-              <div class="meaning-card blue">
+              <div class="meaning-card pink">
                 <div class="meaning-letter">LUV</div>
                 <div class="meaning-desc font-dm">Love — for the ocean, the earth, and all the quiet beauty of everyday life.</div>
               </div>
-              <div class="meaning-card pink">
+              <div class="meaning-card blue">
                 <div class="meaning-letter">BLU</div>
                 <div class="meaning-desc font-dm">Blue — the color of what we must protect. The sea. The sky. Hope.</div>
               </div>
@@ -591,7 +590,7 @@ footer {
 }
 
 .collab-title {
-  font-family: var(--font-caveat);
+  font-family: "Playfair Display", serif;
   font-size: clamp(32px, 4vw, 52px);
   font-weight: 700;
   color: var(--white);
