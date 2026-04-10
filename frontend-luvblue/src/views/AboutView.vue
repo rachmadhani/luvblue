@@ -151,11 +151,7 @@ onMounted(() => {
         <div class="footer-top">
           <div class="footer-brand">
             <div class="footer-logo">
-              <svg width="26" height="24" viewBox="0 0 40 36" fill="var(--teal)">
-                <path d="M20 34L3 17C1 15 0 12 0 9.5 0 4.3 4.3 0 9.5 0c2.9 0 5.5 1.3 7.3 3.3L20 6.7l3.2-3.4C25 1.3 27.6 0 30.5 0 35.7 0 40 4.3 40 9.5c0 2.5-1 4.8-2.7 6.5L20 34z" />
-                <circle cx="20" cy="17" r="5" fill="#111E2E" />
-              </svg>
-              LUVBLU
+              <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-32 w-auto opacity-100" />
             </div>
             <p class="footer-tagline">
               Small Actions, Create Big Waves.<br>
