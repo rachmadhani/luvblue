@@ -36,7 +36,7 @@ onMounted(() => {
         <span>MY BLUE NOTE</span>
       </div>
       <h1 class="font-script text-5xl md:text-6xl text-[#1e293b] mb-6 leading-tight">
-        Turning small daily moments into <span style="color: #71ccd4">my own blue stories</span> 
+        Start Today: Small Eco Tips for our <span style="color: #71ccd4">blue planet</span>
       </h1>
     </header>
 
