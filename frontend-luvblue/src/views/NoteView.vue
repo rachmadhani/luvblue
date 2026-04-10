@@ -35,7 +35,7 @@ onMounted(() => {
         <BookOpen :size="14" />
         <span>MY BLUE NOTE</span>
       </div>
-      <h1 class="font-script text-5xl md:text-6xl text-[#1e293b] mb-6 leading-tight">
+      <h1 class="font-serif text-5xl md:text-6xl text-[#1e293b] mb-6 leading-tight">
         Start Today: Small Eco Tips for our <span style="color: #71ccd4">blue planet</span>
       </h1>
     </header>
@@ -62,13 +62,13 @@ onMounted(() => {
           <div class="inline-block bg-pink-100 text-pink-400 text-[10px] font-bold tracking-widest px-3 py-1 rounded-full mb-6 max-w-fit uppercase">
             {{ latestNote.note_title || 'SEASONAL NOTE ✦ VOL.1' }}
           </div>
-          <h2 class="font-script text-3xl md:text-4xl text-[#1e293b] mb-6">
+          <h2 class="font-serif text-3xl md:text-4xl text-[#1e293b] mb-6">
             {{ latestNote.note_brief_title || 'A Moment in Blue' }}
           </h2>
           <p class="text-gray-500 leading-relaxed mb-8">
             {{ latestNote.note_brief_description || 'Every small moment carries a story. Today\'s blue note captures the essence of a peaceful afternoon, where the light fills the room with warmth and memories.' }}
           </p>
-          <a :href="latestNote.note_instagram_link || '#'" target="_blank" class="flex items-center gap-2 bg-[#4ebbbb] hover:bg-[#3da3a4] text-white px-6 py-3 rounded-full font-script text-lg transition-all group w-fit">
+          <a :href="latestNote.note_instagram_link || '#'" target="_blank" class="flex items-center gap-2 bg-[#4ebbbb] hover:bg-[#3da3a4] text-white px-6 py-3 rounded-full font-serif text-lg transition-all group w-fit">
             Read Full Note
             <ArrowRight :size="18" class="group-hover:translate-x-1 transition-transform" />
           </a>
@@ -94,7 +94,7 @@ onMounted(() => {
           <div class="text-[#71ccd4] text-[10px] font-bold tracking-widest bg-cyan-50 px-2 py-1 rounded mb-4 inline-block w-fit uppercase">
             {{ note.note_title || 'BLUE MOMENTS' }}
           </div>
-          <h3 class="font-script text-2xl text-[#1e293b] mb-4">{{ note.note_brief_title || 'Small Stories' }}</h3>
+          <h3 class="font-serif text-2xl text-[#1e293b] mb-4">{{ note.note_brief_title || 'Small Stories' }}</h3>
           <p class="text-gray-500 text-sm italic mb-6">
             {{ note.note_brief_description || '"In the warmth of this afternoon, I find beauty in peaceful harmony."' }}
           </p>

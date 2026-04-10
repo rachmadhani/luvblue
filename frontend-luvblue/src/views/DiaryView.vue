@@ -35,7 +35,7 @@ onMounted(() => {
         <BookOpen :size="14" />
         <span>MY BLUE DIARY</span>
       </div>
-      <h1 class="font-script text-5xl md:text-6xl text-[#1e293b] mb-6 leading-tight">
+      <h1 class="font-serif text-5xl md:text-6xl text-[#1e293b] mb-6 leading-tight">
         Turning small daily moments into  <span style="color: #71ccd4">my own blue stories</span> 
       </h1>
       <!-- <p class="italic text-gray-500 text-lg">
@@ -66,13 +66,13 @@ onMounted(() => {
           <div class="inline-block bg-pink-100 text-pink-400 text-[10px] font-bold tracking-widest px-3 py-1 rounded-full mb-6 max-w-fit uppercase">
             {{ latestDiary.diary_title || 'SEASONAL DIARY ✦ VOL.2' }}
           </div>
-          <h2 class="font-script text-3xl md:text-4xl text-[#1e293b] mb-6">
+          <h2 class="font-serif text-3xl md:text-4xl text-[#1e293b] mb-6">
             {{ latestDiary.diary_brief_title || 'First Spring, First Kiss' }}
           </h2>
           <p class="text-gray-500 leading-relaxed mb-8">
             {{ latestDiary.diary_brief_description || 'The freshness of spring seeps through the warm sunlight, refilling my heart with new energy. Today\'s spring feels like a tender first greeting — in the warmth of this afternoon, where even a heart carved into old wood feels soft, I find beauty in this peaceful harmony.' }}
           </p>
-          <a :href="latestDiary.diary_instagram_link || '#'" target="_blank" class="flex items-center gap-2 bg-[#4ebbbb] hover:bg-[#3da3a4] text-white px-6 py-3 rounded-full font-script text-lg transition-all group w-fit">
+          <a :href="latestDiary.diary_instagram_link || '#'" target="_blank" class="flex items-center gap-2 bg-[#4ebbbb] hover:bg-[#3da3a4] text-white px-6 py-3 rounded-full font-serif text-lg transition-all group w-fit">
             Read Full Diary
             <ArrowRight :size="18" class="group-hover:translate-x-1 transition-transform" />
           </a>
@@ -98,7 +98,7 @@ onMounted(() => {
           <div class="text-[#71ccd4] text-[10px] font-bold tracking-widest bg-cyan-50 px-2 py-1 rounded mb-4 inline-block w-fit uppercase">
             {{ diary.diary_title || 'BLUE LETTERS' }}
           </div>
-          <h3 class="font-script text-2xl text-[#1e293b] mb-4">{{ diary.diary_brief_title || 'Letters from the Sea' }}</h3>
+          <h3 class="font-serif text-2xl text-[#1e293b] mb-4">{{ diary.diary_brief_title || 'Letters from the Sea' }}</h3>
           <p class="text-gray-500 text-sm italic mb-6">
             {{ diary.diary_brief_description || '"In the warmth of this afternoon, where even a heart carved into old wood feels soft, I find beauty in peaceful harmony."' }}
           </p>

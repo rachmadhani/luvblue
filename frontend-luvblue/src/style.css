@@ -1,10 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Dancing+Script:wght@700&family=Caveat:wght@400;700&family=Gowun+Batang:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-serif: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
   --font-script: "Dancing Script", cursive;
+  --font-caveat: "Caveat", cursive;
+  --font-batang: "Gowun Batang", serif;
+  --font-dm: "DM Sans", sans-serif;
+}
+
+:root {
+  --sky: #A8D5EA;
+  --mint: #5BBCB8;
+  --teal: #3A9E9A;
+  --pink: #F5AECB;
+  --blush: #F9D4E4;
+  --ivory: #F7F4EE;
+  --cream: #EDE8DF;
+  --navy: #1D3557;
+  --darkblue: #2B4E72;
+  --warm: #C9A882;
+  --white: #FDFCFA;
 }
 
 body {
@@ -17,7 +34,44 @@ body {
 }
 
 .font-script {
-  /* font-family: var(--font-script);
-   */
-  font-family: var(--font-serif)
+  font-family: var(--font-script);
+}
+
+.font-caveat {
+  font-family: var(--font-caveat);
+}
+
+.font-batang {
+  font-family: var(--font-batang);
+}
+
+.font-dm {
+  font-family: var(--font-dm);
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
