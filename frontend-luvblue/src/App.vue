@@ -9,6 +9,8 @@
             <component :is="Component" :key="route.path" />
           </Transition>
         </RouterView>
+        <TheCollab />
+        <TheFooter />
       </div>
       <RouterView v-else v-slot="{ Component }">
         <Transition name="page-fade" mode="out-in" appear>
@@ -25,6 +27,8 @@ import { useRoute, RouterView } from 'vue-router'
 import ThemeProvider from './components/layout/ThemeProvider.vue'
 import SidebarProvider from './components/layout/SidebarProvider.vue'
 import HeaderNavbar from './components/HeaderNavbar.vue'
+import TheCollab from './components/layout/TheCollab.vue'
+import TheFooter from './components/layout/TheFooter.vue'
 
 const route = useRoute()
 
