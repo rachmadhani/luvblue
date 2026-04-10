@@ -5,6 +5,7 @@ const heroSection = ref<HTMLElement | null>(null);
 const visualCol = ref<HTMLElement | null>(null);
 const textCol = ref<HTMLElement | null>(null);
 const ourStory = ref<HTMLElement | null>(null);
+const collabSection = ref<HTMLElement | null>(null);
 
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
@@ -15,14 +16,14 @@ onMounted(() => {
     });
   }, { threshold: 0.12 });
 
-  [heroSection, visualCol, textCol, ourStory].forEach(refItem => {
+  [heroSection, visualCol, textCol, ourStory, collabSection].forEach(refItem => {
     if (refItem.value) observer.observe(refItem.value);
   });
 });
 </script>
 
 <template>
-  <main class="pt-32 pb-24 min-h-screen bg-[#fdfbf7]">
+  <main class="pt-32 min-h-screen bg-[#fdfbf7]">
     <!-- Hero & Our Story (Constrained Width) -->
     <div class="max-w-6xl mx-auto px-4 mb-24">
       <section class="text-center mb-20 reveal-manual" ref="heroSection">
@@ -60,11 +61,7 @@ onMounted(() => {
           <!-- Visual -->
           <div class="about-visual reveal-manual" ref="visualCol">
             <div class="about-card-main">
-              <div style="text-align:center;">
-                <div style="font-size:72px;margin-bottom:12px;">🌊</div>
-                <div class="font-caveat text-[28px] font-bold text-white opacity-90">Ashley</div>
-                <div class="font-caveat text-[16px] text-white/65 mt-1">@ashley_luvblu</div>
-              </div>
+              <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="w-full h-full object-contain p-8" />
             </div>
 
             <div class="about-note">
@@ -85,8 +82,8 @@ onMounted(() => {
             </div>
 
             <!-- Tape & sticker decorations -->
-            <div class="tape"></div>
-            <div class="sticker font-caveat">🐚 ocean lover</div>
+            <!-- <div class="tape"></div> -->
+            <!-- <div class="sticker font-caveat">🐚 ocean lover</div> -->
             <div class="floating-heart animate-float">
               <svg width="36" height="32" viewBox="0 0 40 36" fill="#5BBCB8">
                 <path d="M20 34L3 17C1 15 0 12 0 9.5 0 4.3 4.3 0 9.5 0c2.9 0 5.5 1.3 7.3 3.3L20 6.7l3.2-3.4C25 1.3 27.6 0 30.5 0 35.7 0 40 4.3 40 9.5c0 2.5-1 4.8-2.7 6.5L20 34z" />
@@ -125,6 +122,88 @@ onMounted(() => {
         </div>
       </div>
     </section>
+
+    <!-- ─── COLLAB ─── -->
+    <section id="collab" class="reveal-manual" ref="collabSection">
+      <div class="section-inner collab-inner">
+        <div class="section-tag" style="justify-content:center;color:var(--mint);">✦ Work Together</div>
+        <h2 class="collab-title">Let's Create Waves Together</h2>
+        <p class="collab-sub">
+          "At my own pace, I write down my quiet resolves —<br>
+          fully embracing this dazzling beginning with my most authentic breath."
+        </p>
+        <div class="collab-tags">
+          <span class="collab-tag">🌱 Eco Brands</span>
+          <span class="collab-tag">🌊 Marine Organizations</span>
+          <span class="collab-tag">📷 Content Collabs</span>
+          <span class="collab-tag">🎨 Creative Projects</span>
+          <span class="collab-tag">♻️ Sustainability Campaigns</span>
+          <span class="collab-tag">💙 Brand Partnerships</span>
+        </div>
+        <a href="mailto:hello@luvblu.com" class="collab-btn">✦ Say Hello →</a>
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="26" height="24" viewBox="0 0 40 36" fill="var(--teal)">
+                <path d="M20 34L3 17C1 15 0 12 0 9.5 0 4.3 4.3 0 9.5 0c2.9 0 5.5 1.3 7.3 3.3L20 6.7l3.2-3.4C25 1.3 27.6 0 30.5 0 35.7 0 40 4.3 40 9.5c0 2.5-1 4.8-2.7 6.5L20 34z" />
+                <circle cx="20" cy="17" r="5" fill="#111E2E" />
+              </svg>
+              LUVBLU
+            </div>
+            <p class="footer-tagline">
+              Small Actions, Create Big Waves.<br>
+              A love letter to the earth — #LUVBLU
+            </p>
+            <div class="footer-social">
+              <a href="https://www.instagram.com/ashley_luvblu" target="_blank" class="social-btn">📸</a>
+              <a href="https://www.luvblu.com" class="social-btn">🌊</a>
+              <a href="mailto:hello@luvblu.com" class="social-btn">💌</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Diary</div>
+            <ul class="footer-links">
+              <li><a href="#diary">My Blue Diary</a></li>
+              <li><a href="#diary">Blue Letters</a></li>
+              <li><a href="#diary">Seasonal Stories</a></li>
+              <li><a href="#diary">Small Actions</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Content</div>
+            <ul class="footer-links">
+              <li><a href="#reels">Blue Note Vol.1</a></li>
+              <li><a href="#reels">Blue Note Vol.2</a></li>
+              <li><a href="#reels">Hip Recycling</a></li>
+              <li><a href="https://www.instagram.com/ashley_luvblu" target="_blank">All Reels</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Connect</div>
+            <ul class="footer-links">
+              <li><a href="#shop">Eco Shop (Soon)</a></li>
+              <li><a href="#shop">Join Waitlist</a></li>
+              <li><a href="#collab">Collab Inquiry</a></li>
+              <li><a href="https://www.luvblu.com">luvblu.com</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span class="footer-copy">© 2026 LUVBLU · @ashley_luvblu · All rights reserved</span>
+          <span class="footer-heart">made with 💙 for the ocean</span>
+        </div>
+      </div>
+    </footer>
   </main>
 </template>
 
@@ -160,22 +239,24 @@ onMounted(() => {
 
 .about-visual {
   position: relative;
-  height: 500px;
+  height: 550px;
 }
 
 .about-card-main {
   position: absolute;
-  width: 300px;
-  height: 360px;
+  width: 380px;
+  height: 440px;
   top: 0;
   left: 0;
-  transform: rotate(-3deg);
-  background: linear-gradient(145deg, var(--sky), var(--mint));
+  transform: none;
+  background: #ffffff;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 16px 48px rgba(29, 53, 87, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .about-note {
@@ -359,5 +440,208 @@ onMounted(() => {
   .about-visual {
     display: none;
   }
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: #111E2E;
+  padding: 64px 48px 32px;
+  margin-top: 0;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 32px;
+}
+
+.footer-logo {
+  font-family: var(--font-caveat);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  background: var(--teal);
+  transform: translateY(-2px);
+}
+
+.footer-col-title {
+  font-family: var(--font-caveat);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--mint);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.footer-heart {
+  font-family: var(--font-caveat);
+  font-size: 14px;
+  color: var(--pink);
+}
+
+@media (max-width: 900px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+  footer {
+    padding: 48px 24px 24px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+/* ─── COLLAB ─── */
+#collab {
+  background: var(--navy);
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#collab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(91, 188, 184, 0.1) 0%, transparent 70%);
+}
+
+.collab-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.collab-title {
+  font-family: var(--font-caveat);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.collab-sub {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 40px;
+  font-family: var(--font-batang);
+  font-style: italic;
+}
+
+.collab-tags {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.collab-tag {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.collab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--mint);
+  font-family: var(--font-caveat);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 14px 36px;
+  border-radius: 50px;
+  border: 2px solid var(--mint);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.collab-btn:hover {
+  background: var(--mint);
+  color: var(--navy);
+  transform: translateY(-3px);
 }
 </style>
