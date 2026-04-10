@@ -260,6 +260,11 @@ const menuGroups = [
         name: "Diary",
         path: "/admin/diary",
       },
+      {
+        icon: BoxCubeIcon,
+        name: "Blue Note",
+        path: "/admin/blue-notes",
+      },
     ],
   },
 ];

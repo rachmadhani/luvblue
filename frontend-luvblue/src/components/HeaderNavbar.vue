@@ -10,7 +10,8 @@ const navLinks = [
   { 
     name: 'Daily Blue', 
     children: [
-      { name: 'Blue Diary', to: { name: 'BlueDiary' } }
+      { name: 'Blue Diary', to: { name: 'BlueDiary' } },
+      { name: 'Blue Note', to: { name: 'BlueNote' } }
     ]
   },
   { 

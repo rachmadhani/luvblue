@@ -1,9 +1,9 @@
 <template>
-  <AdminLayout title="Diary Management">
-    <PageBreadcrumb page-title="Diary Management" />
+  <AdminLayout title="Blue Note Management">
+    <PageBreadcrumb page-title="Blue Note Management" />
     
     <div class="mt-6">
-      <DiaryTable
+      <BlueNoteTable
         :items="items"
         :loading="loading"
         :current-page="currentPage"
@@ -16,12 +16,12 @@
     </div>
 
     <!-- Create/Edit Modal -->
-    <Modal :show="showModal" :title="isEditing ? 'Edit Diary Entry' : 'Create New Diary Entry'" @close="closeModal">
+    <Modal :show="showModal" :title="isEditing ? 'Edit Blue Note' : 'Create New Blue Note'" @close="closeModal">
       <form @submit.prevent="savePost" class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Title</label>
           <input
-            v-model="form.diary_title"
+            v-model="form.note_title"
             type="text"
             required
             placeholder="Main Title"
@@ -31,7 +31,7 @@
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Brief Title</label>
           <input
-            v-model="form.diary_brief_title"
+            v-model="form.note_brief_title"
             type="text"
             placeholder="Short Title"
             class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
@@ -40,7 +40,7 @@
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Brief Description</label>
           <textarea
-            v-model="form.diary_brief_description"
+            v-model="form.note_brief_description"
             rows="3"
             placeholder="Short description..."
             class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
@@ -49,7 +49,7 @@
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Instagram Link (optional)</label>
           <input
-            v-model="form.diary_instagram_link"
+            v-model="form.note_instagram_link"
             type="text"
             placeholder="e.g. https://instagram.com/p/..."
             class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
@@ -93,7 +93,7 @@
         </div>
         <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Delete Entry?</h3>
         <p class="text-sm text-gray-500 dark:text-gray-400">
-          Are you sure you want to delete this diary entry? This action cannot be undone.
+          Are you sure you want to delete this blue note? This action cannot be undone.
         </p>
       </div>
       <template #footer>
@@ -116,10 +116,10 @@
 import { ref, onMounted, reactive } from 'vue'
 import AdminLayout from '@/components/layout/AdminLayout.vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
-import DiaryTable from '@/components/diary/DiaryTable.vue'
+import BlueNoteTable from '@/components/blueNote/BlueNoteTable.vue'
 import Modal from '@/components/common/modal/Modal.vue'
 import { TrashIcon } from '@/icons'
-import { diaryService } from '@/services/diaryService'
+import { blueNoteService } from '@/services/blueNoteService'
 import { useToast } from '@/composables/useToast'
 import { getImageUrl } from '@/utils/imageUrl'
 
@@ -139,18 +139,17 @@ const previewUrl = ref('')
 const deleting = ref(false)
 
 const form = reactive({
-  diary_title: '',
-  diary_brief_title: '',
-  diary_brief_description: '',
-  diary_instagram_link: ''
+  note_title: '',
+  note_brief_title: '',
+  note_brief_description: '',
+  note_instagram_link: ''
 })
 
 const fetchItems = async () => {
   loading.value = true
   try {
-    const response = await diaryService.getAll(currentPage.value) as any
+    const response = await blueNoteService.getAll(currentPage.value) as any
     if (response.success) {
-      // Support both { data: [...] } and { data: { data: [...], meta: {...} } }
       const responseData = response.data
       if (Array.isArray(responseData)) {
         items.value = responseData
@@ -161,7 +160,7 @@ const fetchItems = async () => {
       }
     }
   } catch (error: any) {
-    toast.error('Failed to fetch diary entries')
+    toast.error('Failed to fetch blue notes')
   } finally {
     loading.value = false
   }
@@ -185,10 +184,10 @@ const openCreateModal = () => {
   currentId.value = null
   selectedFile.value = null
   previewUrl.value = ''
-  form.diary_title = ''
-  form.diary_brief_title = ''
-  form.diary_brief_description = ''
-  form.diary_instagram_link = ''
+  form.note_title = ''
+  form.note_brief_title = ''
+  form.note_brief_description = ''
+  form.note_instagram_link = ''
   showModal.value = true
 }
 
@@ -196,11 +195,11 @@ const openEditModal = (item: any) => {
   isEditing.value = true
   currentId.value = item.id
   selectedFile.value = null
-  previewUrl.value = item.diary_image_url || '' 
-  form.diary_title = item.diary_title || ''
-  form.diary_brief_title = item.diary_brief_title || ''
-  form.diary_brief_description = item.diary_brief_description || ''
-  form.diary_instagram_link = item.diary_instagram_link || ''
+  previewUrl.value = item.note_image_url || '' 
+  form.note_title = item.note_title || ''
+  form.note_brief_title = item.note_brief_title || ''
+  form.note_brief_description = item.note_brief_description || ''
+  form.note_instagram_link = item.note_instagram_link || ''
   showModal.value = true
 }
 
@@ -209,7 +208,7 @@ const closeModal = () => {
 }
 
 const savePost = async () => {
-  if (!form.diary_title) {
+  if (!form.note_title) {
     toast.error('Title is required')
     return
   }
@@ -217,25 +216,25 @@ const savePost = async () => {
   saving.value = true
   const formData = new FormData()
   if (selectedFile.value) {
-    formData.append('diary_image', selectedFile.value)
+    formData.append('note_image', selectedFile.value)
   }
-  formData.append('diary_title', form.diary_title)
-  formData.append('diary_brief_title', form.diary_brief_title)
-  formData.append('diary_brief_description', form.diary_brief_description)
-  formData.append('diary_instagram_link', form.diary_instagram_link)
+  formData.append('note_title', form.note_title)
+  formData.append('note_brief_title', form.note_brief_title)
+  formData.append('note_brief_description', form.note_brief_description)
+  formData.append('note_instagram_link', form.note_instagram_link)
 
   try {
     if (isEditing.value && currentId.value) {
-      await diaryService.update(currentId.value, formData)
-      toast.success('Diary entry updated successfully')
+      await blueNoteService.update(currentId.value, formData)
+      toast.success('Blue note updated successfully')
     } else {
-      await diaryService.create(formData)
-      toast.success('Diary entry created successfully')
+      await blueNoteService.create(formData)
+      toast.success('Blue note created successfully')
     }
     closeModal()
     fetchItems()
   } catch (error: any) {
-    toast.error(error.message || 'Failed to save diary entry')
+    toast.error(error.message || 'Failed to save blue note')
   } finally {
     saving.value = false
   }
@@ -256,9 +255,9 @@ const executeDelete = async () => {
   
   deleting.value = true
   try {
-    const response = await diaryService.delete(itemToDelete.value) as any
+    const response = await blueNoteService.delete(itemToDelete.value) as any
     if (response.success) {
-      toast.success('Diary entry deleted successfully')
+      toast.success('Blue note deleted successfully')
     } else {
       toast.error(response.message || 'Failed to delete entry')
     }

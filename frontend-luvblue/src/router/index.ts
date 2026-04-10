@@ -60,6 +60,15 @@ const router = createRouter({
       },
     },
     {
+      path: '/note',
+      name: 'BlueNote',
+      component: () => import('../views/NoteView.vue'),
+      meta: {
+        title: 'Blue Note',
+        layout: 'public',
+      },
+    },
+    {
       path: '/blue-heart',
       name: 'BlueHeart',
       component: () => import('../views/BlueHeartView.vue'),
@@ -161,6 +170,12 @@ const router = createRouter({
       name: 'Diary Management',
       component: () => import('../views/Diary/DiaryManagement.vue'),
       meta: { title: 'Diary Management' },
+    },
+    {
+      path: '/admin/blue-notes',
+      name: 'Blue Note Management',
+      component: () => import('../views/BlueNote/BlueNoteManagement.vue'),
+      meta: { title: 'Blue Note Management' },
     },
     {
       path: '/admin/blank',

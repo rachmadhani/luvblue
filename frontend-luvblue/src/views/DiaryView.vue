@@ -55,6 +55,7 @@ onMounted(() => {
             :src="getImageUrl(latestDiary.diary_image_url)" 
             class="absolute inset-0 w-full h-full object-cover" 
             alt="Featured Diary"
+            loading="lazy"
           />
           <span v-if="!latestDiary.diary_image_url" class="text-7xl z-10 relative">🌸</span>
           <!-- Optional badge inside image if you had one -->
@@ -89,6 +90,7 @@ onMounted(() => {
             :src="getImageUrl(diary.diary_image_url)" 
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
             alt="Diary Thumbnail"
+            loading="lazy"
           />
           <span v-if="!diary.diary_image_url" class="text-4xl transform group-hover:scale-110 transition-transform relative z-10">🌊</span>
         </div>
