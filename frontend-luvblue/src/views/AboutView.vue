@@ -97,7 +97,7 @@ onMounted(() => {
             <h2 class="section-title font-serif">
               Those who feel<br>
               beauty are the ones<br>
-              who <span style="color: #3A9E9A;">protect it.</span>
+              who <span style="color: #71ccd4;">protect it.</span>
             </h2>
             <div class="space-y-6">
               <p class="text-slate-600 text-lg section-body italic opacity-80">
