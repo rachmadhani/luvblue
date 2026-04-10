@@ -99,10 +99,10 @@ onMounted(() => {
               beauty are the ones<br>
               who <span style="color: #3A9E9A;">protect it.</span>
             </h2>
-            <p class="section-body font-batang">
+            <p class="section-body font-serif">
               There are many ways to talk about the environment. I am not expecting some huge change. I simply want people to experience nature as it is, because I believe the world begins to change when people fall in love with it.
             </p>
-            <p class="section-body font-batang">
+            <p class="section-body font-serif">
               I'm someone who tears up at the sight of ocean sunsets, who stops walking just to listen to cherry blossoms
               fall. The day I realized that beauty might disappear — that's when LUVBLU began.
             </p>
