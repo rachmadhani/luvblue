@@ -11,9 +11,9 @@ const overlayRef = ref<HTMLElement | null>(null)
 
 // Manual positioning for each part to match loveblue_illustration.jpg
 const layers = [
-  { id: 'sky', src: '/parallax/loveblue_background_sky.png', depth: 0.04, style: 'w-full h-auto object-cover' },
-  { id: 'clouds', src: '/parallax/loveblue_middleground_clouds.png', depth: 0.08, style: 'w-full h-full object-cover' },
-  { id: 'sea', src: '/parallax/loveblue_sea.png', depth: 0.12, style: 'sea-layer inset-0 w-full h-[34.37%] top-auto bottom-0 object-cover' },
+  { id: 'sky', src: '/parallax/loveblue_background_sky.webp', depth: 0.04, style: 'w-full h-auto object-cover' },
+  { id: 'clouds', src: '/parallax/loveblue_middleground_clouds.webp', depth: 0.08, style: 'w-full h-full object-cover' },
+  { id: 'sea', src: '/parallax/loveblue_sea.webp', depth: 0.12, style: 'sea-layer inset-0 w-full h-[34.37%] top-auto bottom-0 object-cover' },
   { id: 'small_island_2', src: '/parallax/loveblue_small_island_2.png', depth: 0.15, style: 'small-island-2-layer top-[92%] left-0 w-[23.6%] h-auto' },
   { id: 'small_island_1', src: '/parallax/loveblue_small_island_1.png', depth: 0.2, style: 'small-island-1-layer top-[79%] right-0 w-[41.2%] h-auto' },
   { id: 'househill', src: '/parallax/loveblue_househill.png', depth: 0.25, style: 'househill-layer right-0 w-[41.8%] h-auto' },
