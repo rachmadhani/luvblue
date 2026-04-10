@@ -92,20 +92,22 @@ onMounted(() => {
           </div>
 
           <!-- Text -->
-          <div class="reveal-manual" ref="textCol">
+          <div class="reveal-manual space-y-6" ref="textCol">
             <div class="section-tag">My Story</div>
             <h2 class="section-title font-serif">
               Those who feel<br>
               beauty are the ones<br>
               who <span style="color: #3A9E9A;">protect it.</span>
             </h2>
-            <p class="section-body font-serif">
-              There are many ways to talk about the environment. I am not expecting some huge change. I simply want people to experience nature as it is, because I believe the world begins to change when people fall in love with it.
-            </p>
-            <p class="section-body font-serif">
-              I'm someone who tears up at the sight of ocean sunsets, who stops walking just to listen to cherry blossoms
-              fall. The day I realized that beauty might disappear — that's when LUVBLU began.
-            </p>
+            <div class="space-y-6">
+              <p class="text-slate-600 text-lg section-body italic opacity-80">
+                There are many ways to talk about the environment. I am not expecting some huge change. I simply want people to experience nature as it is, because I believe the world begins to change when people fall in love with it.
+              </p>
+              <p class="text-slate-600 text-lg section-body italic opacity-80">
+                I'm someone who tears up at the sight of ocean sunsets, who stops walking just to listen to cherry blossoms
+                fall. The day I realized that beauty might disappear — that's when LUVBLU began.
+              </p>
+            </div>
 
             <div class="meaning-row">
               <div class="meaning-card pink">
@@ -379,11 +381,11 @@ onMounted(() => {
 }
 
 .section-body {
-  font-size: 16px;
+  /* font-size: 16px; */
   line-height: 1.9;
-  color: var(--darkblue);
+  /* color: var(--darkblue);
   opacity: 0.8;
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
 }
 
 .tape {
