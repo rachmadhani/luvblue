@@ -15,14 +15,16 @@ const isNightTime = () => {
 }
 
 const isNight = ref(isNightTime())
+const isManual = ref(false)
 
 const toggleMode = () => {
   isNight.value = !isNight.value
+  isManual.value = true
 }
 
 // Manual positioning for each part to match loveblue_illustration.jpg
 const dayLayers = [
-  { id: 'sky', src: '/parallax/loveblue_background_sky.webp', depth: 0.04, style: 'w-full h-auto object-cover' },
+  { id: 'sky', src: '/parallax/loveblue_background_sky.webp', depth: 0.04, style: 'sky-layer w-full h-auto object-cover' },
   { id: 'clouds', src: '/parallax/loveblue_middleground_clouds.webp', depth: 0.08, style: 'w-full h-full object-cover' },
   { id: 'sea', src: '/parallax/loveblue_sea.webp', depth: 0.12, style: 'sea-layer inset-0 w-full h-[34.37%] top-auto bottom-0 object-cover' },
   { id: 'small_island_2', src: '/parallax/loveblue_small_island_2.png', depth: 0.15, style: 'small-island-2-layer top-[92%] left-0 w-[23.6%] h-auto' },
@@ -37,27 +39,27 @@ const dayLayers = [
 ]
 
 const nightLayers = [
-  { id: 'sky_night', src: '/night-parallax/luvblu_night_sky.png', depth: 0.02, style: 'inset-0 w-full h-full', zIndex: 10 },
-  { id: 'starry', src: '/night-parallax/APNG/luvblu_illustration_night_starry.png', depth: 0.03, style: 'inset-0 w-full h-full', zIndex: 15 },
-  { id: 'star1', src: '/night-parallax/APNG/luvblu_illustration_night_star_1.png', depth: 0.035, style: 'inset-0 w-full h-full', zIndex: 12 },
-  { id: 'star2', src: '/night-parallax/APNG/luvblu_illustration_night_star_2.png', depth: 0.04, style: 'inset-0 w-full h-full', zIndex: 12 },
-  { id: 'star3', src: '/night-parallax/APNG/luvblu_illustration_night_star_3.png', depth: 0.045, style: 'inset-0 w-full h-full', zIndex: 12 },
-  { id: 'star4', src: '/night-parallax/APNG/luvblu_illustration_night_star_4.png', depth: 0.05, style: 'inset-0 w-full h-full', zIndex: 12 },
-  { id: 'star5', src: '/night-parallax/APNG/luvblu_illustration_night_star_5.png', depth: 0.055, style: 'inset-0 w-full h-full', zIndex: 12 },
-  { id: 'shootingstar', src: '/night-parallax/APNG/luvblu_illustration_001_night_shootingstar.png', depth: 0.03, style: 'inset-0 w-full h-full', zIndex: 14 },
-  { id: 'clouds_night', src: '/night-parallax/luvblu_illustration_night_clouds.png', depth: 0.06, style: 'inset-0 w-full h-full scale-105', zIndex: 13 },
-  { id: 'lighthouse_lights', src: '/night-parallax/APNG/luvblu_illustration_001_night_lighthouse_light.png', depth: 0.08, style: 'inset-0 w-full h-full', zIndex: 18 },
-  { id: 'sparkaroundlights', src: '/night-parallax/luvblu_night_sparkaroundlights.png', depth: 0.08, style: 'inset-0 w-full h-full', zIndex: 16 },
-  { id: 'lighthouse_night', src: '/night-parallax/luvblu_night_lighthouse.png', depth: 0.10, style: 'inset-0 w-full h-full', zIndex: 17 },
-  { id: 'househill_night', src: '/night-parallax/luvblu_night_househill.png', depth: 0.12, style: 'inset-0 w-full h-full', zIndex: 23 },
-  { id: 'housesmoke', src: '/night-parallax/APNG/luvblu_illustration_001_night_housesmoke.png', depth: 0.12, style: 'inset-0 w-full h-full', zIndex: 19 },
-  { id: 'small_island_1_night', src: '/night-parallax/luvblu_night_small_island_1.png', depth: 0.14, style: 'inset-0 w-full h-full', zIndex: 23 },
-  { id: 'sea_night', src: '/night-parallax/luvblu_night_sea.png', depth: 0.16, style: 'inset-0 w-full h-full', zIndex: 21 },
-  { id: 'kra', src: '/night-parallax/luvblu_night_kra.png', depth: 0.17, style: 'inset-0 w-full h-full', zIndex: 22 },
-  { id: 'small_island_2_night', src: '/night-parallax/luvblu_night_small_island_2.png', depth: 0.18, style: 'inset-0 w-full h-full', zIndex: 23 },
-  { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'inset-0 w-full left-[2.5%] h-full whale-night-pos', zIndex: 24 },
-  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'inset-0 w-full h-full left-[1.6%] character-night-pos', zIndex: 25 },
-  { id: 'glitter', src: '/night-parallax/luvblu_night_glitter.png', depth: 0.24, style: 'inset-0 w-full h-full', zIndex: 30 },
+  { id: 'sky_night', src: '/night-parallax/luvblu_night_sky.png', depth: 0.02, style: 'sky-night-layer inset-0 w-full h-full', zIndex: 10 },
+  { id: 'starry', src: '/night-parallax/APNG/luvblu_illustration_night_starry.png', depth: 0.03, style: 'starry-night-layer inset-0 w-full h-full', zIndex: 15 },
+  { id: 'star1', src: '/night-parallax/APNG/luvblu_illustration_night_star_1.png', depth: 0.035, style: 'star-1-layer inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star2', src: '/night-parallax/APNG/luvblu_illustration_night_star_2.png', depth: 0.04, style: 'star-2-layer inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star3', src: '/night-parallax/APNG/luvblu_illustration_night_star_3.png', depth: 0.045, style: 'star-3-layer inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star4', src: '/night-parallax/APNG/luvblu_illustration_night_star_4.png', depth: 0.05, style: 'star-4-layer inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star5', src: '/night-parallax/APNG/luvblu_illustration_night_star_5.png', depth: 0.055, style: 'star-5-layer inset-0 w-full h-full', zIndex: 12 },
+  { id: 'shootingstar', src: '/night-parallax/APNG/luvblu_illustration_001_night_shootingstar.png', depth: 0.03, style: 'shootingstar-layer inset-0 w-full h-full', zIndex: 14 },
+  { id: 'clouds_night', src: '/night-parallax/luvblu_illustration_night_clouds.png', depth: 0.06, style: 'clouds-layer inset-0 w-full h-full scale-105', zIndex: 13 },
+  { id: 'lighthouse_lights', src: '/night-parallax/APNG/luvblu_illustration_001_night_lighthouse_light.png', depth: 0.08, style: 'lighthouse-layer inset-0 w-full h-full', zIndex: 18 },
+  { id: 'sparkaroundlights', src: '/night-parallax/luvblu_night_sparkaroundlights.png', depth: 0.08, style: 'sparkaroundlights-layer inset-0 w-full h-full', zIndex: 16 },
+  { id: 'lighthouse_night', src: '/night-parallax/luvblu_night_lighthouse.png', depth: 0.10, style: 'lighthouse-night-layer inset-0 w-full h-full', zIndex: 17 },
+  { id: 'househill_night', src: '/night-parallax/luvblu_night_househill.png', depth: 0.12, style: 'househill-night-layer right-0  h-auto', zIndex: 23 },
+  { id: 'housesmoke', src: '/night-parallax/APNG/luvblu_illustration_001_night_housesmoke.png', depth: 0.12, style: 'housesmoke-night-layer inset-0 w-full h-full', zIndex: 19 },
+  { id: 'small_island_1_night', src: '/night-parallax/luvblu_night_small_island_1.png', depth: 0.14, style: 'small-island-1-night-layer inset-0 w-full h-full', zIndex: 23 },
+  { id: 'sea_night', src: '/night-parallax/luvblu_night_sea.png', depth: 0.16, style: 'sea-night-layer inset-0 w-full h-full', zIndex: 21 },
+  { id: 'kra', src: '/night-parallax/luvblu_night_kra.png', depth: 0.17, style: 'kra-night-layer inset-0 w-full h-full', zIndex: 22 },
+  { id: 'small_island_2_night', src: '/night-parallax/luvblu_night_small_island_2.png', depth: 0.18, style: 'small-island-2-night-layer inset-0 w-full h-full', zIndex: 23 },
+  { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'whale-small-night-layer inset-0 w-full left-[2.5%] h-full whale-night-pos', zIndex: 24 },
+  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'character-night-layer inset-0 w-full h-full left-[1.6%] character-night-pos', zIndex: 25 },
+  { id: 'glitter', src: '/night-parallax/luvblu_night_glitter.png', depth: 0.24, style: 'glitter-night-layer inset-0 w-full h-full', zIndex: 30 },
 ]
 
 const handleAudioEnd = () => {
@@ -238,11 +240,12 @@ onMounted(() => {
 
   // Auto-update mode based on local time
   timeCheckInterval = window.setInterval(() => {
+    if (isManual.value) return // Don't auto-switch if user manually toggled
     const newMode = isNightTime()
     if (newMode !== isNight.value) {
       isNight.value = newMode
     }
-  }, 60000) // Check every minute
+  }, 60000) 
 })
 
 watch(isNight, () => {
@@ -250,39 +253,6 @@ watch(isNight, () => {
     initAnimations()
   })
 })
-
-// const lyricsData = [
-//   {
-//     startTime: 33,
-//     endTime: 92,
-//     text: "The morning wakes in a shade of pale... A fragile world behind a misty veil... I hear the heartbeat of the deep blue sea... Whispering secrets of how it used to be... Soft as a feather, the wind begins to sigh... Searching for clarity in a clouded sky... Every breath we take is a gift from the green... Every drop of life in the rivers unseen... It’s time to listen, it’s time to feel... The spirit of the earth, so pure and real"
-//   },
-//   {
-//     startTime: 93,
-//     endTime: 137,
-//     text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
-//   },
-//   {
-//     startTime: 138,
-//     endTime: 169,
-//     text: "Golden sands and the emerald trees... Dancing slow in the cooling breeze... But shadows linger where the plastic flows... A silent ache that the mountain knows... Let’s heal the scars with a gentle hand... To bring the magic back to the land"
-//   },
-//   {
-//     startTime: 170,
-//     endTime: 196,
-//     text: "It’s not too late to change the flow... To let the ancient forests grow... A simple choice, a kinder way... To save the dawn of a brand new day... Grace in our steps, love in our soul"
-//   },
-//   {
-//     startTime: 197,
-//     endTime: 239,
-//     text: "LoveBlue, oh, LoveBlue... A sapphire dream we’re holding onto... Underneath the velvet sky so wide... Keep the light of the stars alive... LoveBlue, with every beat of our heart... For a world that shall never fall apart"
-//   },
-//   {
-//     startTime: 240,
-//     endTime: 260,
-//     text: "Keep it blue... keep it pure... LoveBlue..."
-//   }
-// ]
 
 const lyricsData = [
   {
@@ -562,8 +532,8 @@ onUnmounted(() => {
     ></audio>
   <section 
     ref="sectionRef"
-    class="hero-section relative w-full h-[56.25vw] min-h-[400px] overflow-hidden transition-colors duration-1000"
-    :class="isNight ? 'bg-[#0B1426]' : 'bg-[#5FBFCA]'"
+    class="hero-section relative w-full h-[100vw] md:h-[56.25vw] min-h-[400px] overflow-hidden transition-colors duration-1000"
+    :class="[isNight ? 'bg-[#0B1426] is-night' : 'bg-[#5FBFCA] is-day']"
   >
     <!-- Day Layers -->
     <template v-if="!isNight">
@@ -613,7 +583,7 @@ onUnmounted(() => {
     <!-- Text Overlay: Refined LUVBLU title -->
     <div 
       ref="overlayRef"
-      class="absolute inset-0 z-50 flex flex-col items-end justify-end md:justify-start pt-0 md:pt-40 pb-12 md:pb-0 px-6 md:pr-24 pointer-events-none"
+      class="absolute inset-0 z-50 flex flex-col items-end justify-end md:justify-start pt-0 md:pt-40 pb-4 md:pb-0 px-4 md:pr-24 pointer-events-none"
     >
       <div class="text-right flex flex-col items-end">
         <h1 class="hidden md:block text-7xl md:text-9xl font-serif mb-1 drop-shadow-sm opacity-95 tracking-tighter italic"
@@ -752,6 +722,20 @@ section {
     border-right-width: 7px;
     border-top-width: 9px;
   }
+
+  .sky-layer {
+    width: 500px;
+  }
+  
+  .househill-night-layer {
+    /* width: 1200px; */
+    
+    /* left: -50%; */
+  }
+
+  .sea-layer{
+    width: 500px;
+  }
 }
 
 /* Househill: position to match desktop composition */
@@ -761,7 +745,15 @@ section {
 
 @media screen and (max-width: 767px) {
   .househill-layer {
-    top: 50%;
+    top: 52%;
+  }
+
+  .speech-bubble {
+    left: -10px;
+  }
+
+  .sky-layer {
+    width: 500px;
   }
 
   .sea-layer img {
@@ -769,60 +761,67 @@ section {
   }
 
   .small-island-1-layer {
-    top: 84%;
+    top: 89%;
   }
 
   .small-island-2-layer {
-    top: 93%;
+    top: 95%;
   }
   
   .whale-small-layer {
-    top: 65%;
+    top: 60%;
   }
 
   .character-layer {
-     top: 61%;
-  }
-
-  .whale-jump-layer {
-    top: 30%;
-  }
-
-  .lighthouse-layer {
-    top: 45%;
-  }
-
-  .whale-splash-layer {
-    top: 69%;
-  }
-}
-
-@media screen and (max-width: 360px) and (max-height: 780px) {
-  .househill-layer {
-    top: 53%;
-  }
-
-  .whale-small-layer {
-    top: 67%;
-  }
-
-  .small-island-1-layer {
-    top: 86%;
-  }
-
-  .small-island-2-layer {
-    top: 94%;
-  }
-
-  .lighthouse-layer {
-    top: 45%;
-  }
-  .whale-splash-layer {
-    top: 72%;
+     top: 57%;
   }
 
   .whale-jump-layer {
     top: 35%;
+  }
+
+  .lighthouse-layer {
+    top: 46%;
+  }
+
+  .whale-splash-layer {
+    top: 62%;
+  }
+}
+
+@media screen and (max-width: 360px) and (max-height: 780px) {
+  .sea-layer {
+    top: 70%;
+  }
+  .househill-layer {
+    top: 58%;
+  }
+
+  .speech-bubble {
+    bottom: -20px;
+  }
+
+  .whale-small-layer {
+    top: 66%;
+  }
+
+  .small-island-1-layer {
+    top: 90%;
+  }
+
+  .small-island-2-layer {
+    top: 95%;
+  }
+
+  .lighthouse-layer {
+    top: 54%;
+  }
+  .whale-splash-layer {
+    top: 68%;
+  }
+
+  .whale-jump-layer {
+    top: 40%;
   }
 
   .character-layer {
@@ -835,9 +834,5 @@ section {
   }
 }
 
-/* Custom Night Positioning — uses margin-left instead of transform to avoid GSAP conflicts */
-.whale-night-pos, .character-night-pos {
-  /* margin-left: 15%; */
-}
 
 </style>
