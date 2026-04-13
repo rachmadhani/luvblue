@@ -9,7 +9,18 @@ const layersRef = ref<HTMLElement[]>([])
 const speechBubbleRef = ref<HTMLElement | null>(null)
 const overlayRef = ref<HTMLElement | null>(null)
 
-const isNight = ref(localStorage.getItem('home-hero-mode') === 'night')
+const isNightTime = () => {
+  const hour = new Date().getHours()
+  return hour < 6 || hour >= 18 // Night is 6 PM to 6 AM
+}
+
+const getInitialMode = () => {
+  const saved = localStorage.getItem('home-hero-mode')
+  if (saved) return saved === 'night'
+  return isNightTime()
+}
+
+const isNight = ref(getInitialMode())
 
 const toggleMode = () => {
   isNight.value = !isNight.value
@@ -51,8 +62,8 @@ const nightLayers = [
   { id: 'sea_night', src: '/night-parallax/luvblu_night_sea.png', depth: 0.16, style: 'inset-0 w-full h-full', zIndex: 21 },
   { id: 'kra', src: '/night-parallax/luvblu_night_kra.png', depth: 0.17, style: 'inset-0 w-full h-full', zIndex: 22 },
   { id: 'small_island_2_night', src: '/night-parallax/luvblu_night_small_island_2.png', depth: 0.18, style: 'inset-0 w-full h-full', zIndex: 23 },
-  { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'inset-0 w-full h-full', zIndex: 24 },
-  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'inset-0 w-full h-full', zIndex: 25 },
+  { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'inset-0 w-full left-[2.5%] h-full whale-night-pos', zIndex: 24 },
+  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'inset-0 w-full h-full left-[2%] character-night-pos', zIndex: 25 },
   { id: 'glitter', src: '/night-parallax/luvblu_night_glitter.png', depth: 0.24, style: 'inset-0 w-full h-full', zIndex: 30 },
 ]
 
@@ -236,9 +247,22 @@ const initAnimations = () => {
   }
 }
 
+let timeCheckInterval: number | null = null
+
 onMounted(() => {
   initAnimations()
   window.addEventListener('mousemove', handleMouseMove)
+
+  // Auto-update mode based on time if no manual override exists
+  timeCheckInterval = window.setInterval(() => {
+    const saved = localStorage.getItem('home-hero-mode')
+    if (!saved) { 
+      const newMode = isNightTime()
+      if (newMode !== isNight.value) {
+        isNight.value = newMode
+      }
+    }
+  }, 60000) // Check every minute
 })
 
 watch(isNight, () => {
@@ -486,7 +510,7 @@ const handleTimeUpdate = (e: Event) => {
       gsap.to(lyricRef.value, {
         opacity: 0,
         y: -10,
-        duration: 0.4,
+        duration: 0.25, // Faster
         ease: "power2.inOut",
         onComplete: () => {
           currentLyric.value = activeLyric.text
@@ -497,7 +521,7 @@ const handleTimeUpdate = (e: Event) => {
           nextTick(() => {
             if (lyricRef.value) {
               gsap.to(lyricRef.value, {
-                opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+                opacity: 1, y: 0, duration: 0.4, ease: "power3.out", // Faster
                 onComplete: () => { isAnimating.value = false }
               })
             } else {
@@ -516,7 +540,7 @@ const handleTimeUpdate = (e: Event) => {
         if (lyricRef.value) {
           gsap.set(lyricRef.value, { opacity: 0, y: 10 })
           gsap.to(lyricRef.value, {
-            opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+            opacity: 1, y: 0, duration: 0.4, ease: "power3.out", // Faster
             onComplete: () => { isAnimating.value = false }
           })
         } else {
@@ -532,7 +556,7 @@ const handleTimeUpdate = (e: Event) => {
     gsap.to(lyricRef.value, {
       opacity: 0,
       y: -10,
-      duration: 0.4,
+      duration: 0.25, // Faster
       ease: "power2.inOut",
       onComplete: () => {
         currentLyric.value = ""
@@ -543,7 +567,8 @@ const handleTimeUpdate = (e: Event) => {
 }
 
 onUnmounted(() => {
-  // window.removeEventListener('mousemove', handleMouseMove)
+  if (timeCheckInterval) clearInterval(timeCheckInterval)
+  window.removeEventListener('mousemove', handleMouseMove)
 })
 </script>
 
@@ -828,6 +853,11 @@ section {
     height: 45%;
     bottom: 0;
   }
+}
+
+/* Custom Night Positioning — uses margin-left instead of transform to avoid GSAP conflicts */
+.whale-night-pos, .character-night-pos {
+  /* margin-left: 15%; */
 }
 
 </style>
