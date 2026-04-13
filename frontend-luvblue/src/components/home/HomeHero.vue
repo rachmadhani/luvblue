@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { gsap } from 'gsap'
 
 const sectionRef = ref<HTMLElement | null>(null)
@@ -9,8 +9,15 @@ const layersRef = ref<HTMLElement[]>([])
 const speechBubbleRef = ref<HTMLElement | null>(null)
 const overlayRef = ref<HTMLElement | null>(null)
 
+const isNight = ref(localStorage.getItem('home-hero-mode') === 'night')
+
+const toggleMode = () => {
+  isNight.value = !isNight.value
+  localStorage.setItem('home-hero-mode', isNight.value ? 'night' : 'day')
+}
+
 // Manual positioning for each part to match loveblue_illustration.jpg
-const layers = [
+const dayLayers = [
   { id: 'sky', src: '/parallax/loveblue_background_sky.webp', depth: 0.04, style: 'w-full h-auto object-cover' },
   { id: 'clouds', src: '/parallax/loveblue_middleground_clouds.webp', depth: 0.08, style: 'w-full h-full object-cover' },
   { id: 'sea', src: '/parallax/loveblue_sea.webp', depth: 0.12, style: 'sea-layer inset-0 w-full h-[34.37%] top-auto bottom-0 object-cover' },
@@ -23,6 +30,30 @@ const layers = [
   { id: 'whale_jump', src: '/parallax/loveblue_whale.png', depth: 0.45, style: 'whale-jump-layer top-[25%] left-[13%] w-[30.2%] h-auto', zIndex: 11 },
   { id: 'whale_splash', src: '/parallax/loveblue_whale_splash.png', depth: 0.5, style:'whale-splash-layer top-[60%] left-[11.8%] w-[21.5%] h-auto', zIndex: 13 },
   { id: 'particles', src: '/parallax/loveblue_particles.png', depth: 0.55, style: 'inset-0 w-full h-full opacity-50 object-cover' },
+]
+
+const nightLayers = [
+  { id: 'sky_night', src: '/night-parallax/luvblu_night_sky.png', depth: 0.02, style: 'inset-0 w-full h-full', zIndex: 10 },
+  { id: 'starry', src: '/night-parallax/APNG/luvblu_illustration_night_starry.png', depth: 0.03, style: 'inset-0 w-full h-full', zIndex: 15 },
+  { id: 'star1', src: '/night-parallax/APNG/luvblu_illustration_night_star_1.png', depth: 0.035, style: 'inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star2', src: '/night-parallax/APNG/luvblu_illustration_night_star_2.png', depth: 0.04, style: 'inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star3', src: '/night-parallax/APNG/luvblu_illustration_night_star_3.png', depth: 0.045, style: 'inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star4', src: '/night-parallax/APNG/luvblu_illustration_night_star_4.png', depth: 0.05, style: 'inset-0 w-full h-full', zIndex: 12 },
+  { id: 'star5', src: '/night-parallax/APNG/luvblu_illustration_night_star_5.png', depth: 0.055, style: 'inset-0 w-full h-full', zIndex: 12 },
+  { id: 'shootingstar', src: '/night-parallax/APNG/luvblu_illustration_001_night_shootingstar.png', depth: 0.03, style: 'inset-0 w-full h-full', zIndex: 14 },
+  { id: 'clouds_night', src: '/night-parallax/luvblu_illustration_night_clouds.png', depth: 0.06, style: 'inset-0 w-full h-full scale-105', zIndex: 13 },
+  { id: 'lighthouse_lights', src: '/night-parallax/APNG/luvblu_illustration_night_lighthouse_light.png', depth: 0.08, style: 'inset-0 w-full h-full', zIndex: 18 },
+  { id: 'sparkaroundlights', src: '/night-parallax/luvblu_night_sparkaroundlights.png', depth: 0.08, style: 'inset-0 w-full h-full', zIndex: 16 },
+  { id: 'lighthouse_night', src: '/night-parallax/luvblu_night_lighthouse.png', depth: 0.10, style: 'inset-0 w-full h-full', zIndex: 17 },
+  { id: 'househill_night', src: '/night-parallax/luvblu_night_househill.png', depth: 0.12, style: 'inset-0 w-full h-full', zIndex: 23 },
+  { id: 'housesmoke', src: '/night-parallax/APNG/luvblu_illustration_001_night_housesmoke.png', depth: 0.12, style: 'inset-0 w-full h-full', zIndex: 19 },
+  { id: 'small_island_1_night', src: '/night-parallax/luvblu_night_small_island_1.png', depth: 0.14, style: 'inset-0 w-full h-full', zIndex: 23 },
+  { id: 'sea_night', src: '/night-parallax/luvblu_night_sea.png', depth: 0.16, style: 'inset-0 w-full h-full', zIndex: 21 },
+  { id: 'kra', src: '/night-parallax/luvblu_night_kra.png', depth: 0.17, style: 'inset-0 w-full h-full', zIndex: 22 },
+  { id: 'small_island_2_night', src: '/night-parallax/luvblu_night_small_island_2.png', depth: 0.18, style: 'inset-0 w-full h-full', zIndex: 23 },
+  { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'inset-0 w-full h-full', zIndex: 24 },
+  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'inset-0 w-full h-full', zIndex: 25 },
+  { id: 'glitter', src: '/night-parallax/luvblu_night_glitter.png', depth: 0.24, style: 'inset-0 w-full h-full', zIndex: 30 },
 ]
 
 const handleAudioEnd = () => {
@@ -40,37 +71,47 @@ const startAudio = () => {
 const handleMouseMove = (e: MouseEvent) => {
   // Parallax disabled per user request
   /*
+  if (!sectionRef.value) return
   const { clientX, clientY } = e
   const { innerWidth, innerHeight } = window
   
   mouse.x = (clientX / innerWidth - 0.5)
   mouse.y = (clientY / innerHeight - 0.5)
 
+  const activeLayers = isNight.value ? nightLayers : dayLayers
   layersRef.value.forEach((layer, index) => {
-    const config = layers[index]
+    const config = activeLayers[index]
     if (!layer || !config) return
     const depth = config.depth
     gsap.to(layer, {
       x: mouse.x * depth * 80,
       y: mouse.y * depth * 40,
-      duration: 1,
+      duration: 1.5,
       ease: 'power2.out'
     })
   })
   */
 }
 
-onMounted(() => {
-  // Entrance Animations: Elegant reveal
+const initAnimations = () => {
+  // Clear any existing animations
+  gsap.killTweensOf('.parallax-layer')
+  
+  const activeLayers = isNight.value ? nightLayers : dayLayers
+  
   layersRef.value.forEach((layer, index) => {
-    const config = layers[index]
-    if (!layer || !config) return
+    if (!layer) return
+    const config = activeLayers[index]
+    if (!config) return
     
-    if (index < 2) {
-      // Sky and Clouds
+    // reset positions
+    gsap.set(layer, { x: 0, y: 0, opacity: 0 })
+
+    if (index < 3) {
+      // Sky, Starry, Clouds
       gsap.fromTo(layer, 
         { scale: 1.05, filter: 'blur(10px)', opacity: 0 },
-        { scale: 1, filter: 'blur(0px)', opacity: 1, duration: 2.5, ease: 'power2.out' }
+        { scale: 1, filter: 'blur(0px)', opacity: 1, duration: 2.5, ease: 'power2.out', delay: index * 0.1 }
       )
     } else {
       gsap.fromTo(layer,
@@ -80,17 +121,80 @@ onMounted(() => {
     }
   })
 
-  // Fade in the text overlay
-  if (overlayRef.value) {
-    gsap.fromTo(overlayRef.value,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 2, ease: 'power2.out', delay: 0.8 }
-    )
+  // Night specific animations (GIFs handle starry, shooting star, lighthouse, smoke)
+  if (isNight.value) {
+    // Subtle cloud drift with scale to prevent gaps
+    const cloudIdx = nightLayers.findIndex(l => l.id === 'clouds_night')
+    if (layersRef.value[cloudIdx]) {
+      gsap.to(layersRef.value[cloudIdx], {
+        x: '+=30',
+        scale: 1.1,
+        duration: 30,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      })
+    }
+
+    // Glitter sparkle pulse
+    const glitterIdx = nightLayers.findIndex(l => l.id === 'glitter')
+    if (layersRef.value[glitterIdx]) {
+      gsap.to(layersRef.value[glitterIdx], {
+        opacity: 0.6,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      })
+    }
+  } else {
+    // Majestic Whale Leap Animation (Day only)
+    const whaleJumpIdx = dayLayers.findIndex(l => l.id === 'whale_jump')
+    const whaleSplashIdx = dayLayers.findIndex(l => l.id === 'whale_splash')
+
+    if (layersRef.value[whaleJumpIdx] && layersRef.value[whaleSplashIdx]) {
+      const leapTl = gsap.timeline({ repeat: -1, repeatDelay: 3 })
+      
+      leapTl.fromTo(layersRef.value[whaleJumpIdx],
+        { y: 500, opacity: 0, rotation: -5 },
+        { y: 0, opacity: 1, rotation: 0, duration: 1.8, ease: "power2.out" }
+      )
+      .to(layersRef.value[whaleJumpIdx],
+        { y: 500, opacity: 0, rotation: 5, duration: 1.8, ease: "power2.in" },
+        "+=0.4"
+      )
+
+      const splashEl = layersRef.value[whaleSplashIdx]
+      gsap.set(splashEl, { opacity: 0, scale: 1 })
+      
+      leapTl.to(splashEl, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(2)"
+      }, 1.1)
+      .to(splashEl, {
+        opacity: 0,
+        scale: 1,
+        duration: 0.8
+      }, 1.7)
+      .to(splashEl, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(2)"
+      }, 2.5)
+      .to(splashEl, {
+        opacity: 0,
+        scale: 1,
+        duration: 0.8
+      }, 3.1)
+    }
   }
 
-  // Subtle Bobbing for Whale Base and Character
-  const whaleBaseIdx = layers.findIndex(l => l.id === 'whale_base')
-  const charIdx = layers.findIndex(l => l.id === 'character')
+  // Bobbing for Whale Base and Character (Both modes)
+  const whaleBaseIdx = activeLayers.findIndex(l => l.id.includes('whale_base'))
+  const charIdx = activeLayers.findIndex(l => l.id.includes('character'))
   
   if (layersRef.value[whaleBaseIdx]) {
     gsap.to([layersRef.value[whaleBaseIdx], layersRef.value[charIdx], speechBubbleRef.value], {
@@ -102,53 +206,35 @@ onMounted(() => {
     })
   }
 
-  // Majestic Whale Leap Animation
-  const whaleJumpIdx = layers.findIndex(l => l.id === 'whale_jump')
-  const whaleSplashIdx = layers.findIndex(l => l.id === 'whale_splash')
-
-  if (layersRef.value[whaleJumpIdx] && layersRef.value[whaleSplashIdx]) {
-    const leapTl = gsap.timeline({ repeat: -1, repeatDelay: 3 })
-    
-    // The Whale Leap - Simplified scale for 'size like before'
-    leapTl.fromTo(layersRef.value[whaleJumpIdx],
-      { y: 500, opacity: 0, rotation: -5 },
-      { y: 0, opacity: 1, rotation: 0, duration: 1.8, ease: "power2.out" }
-    )
-    .to(layersRef.value[whaleJumpIdx],
-      { y: 500, opacity: 0, rotation: 5, duration: 1.8, ease: "power2.in" },
-      "+=0.4"
-    )
-
-    // The Splash (precisely synchronized with breach and re-entry)
-    const splashEl = layersRef.value[whaleSplashIdx]
-    gsap.set(splashEl, { opacity: 0, scale: 1 })
-    
-    leapTl.to(splashEl, {
-      opacity: 1,
-      scale: 1,
-      duration: 0.6,
-      ease: "back.out(2)"
-    }, 1.1) // Breach splash
-    .to(splashEl, {
-      opacity: 0,
-      scale: 1,
-      duration: 0.8
-    }, 1.7)
-    .to(splashEl, {
-      opacity: 1,
-      scale: 1,
-      duration: 0.6,
-      ease: "back.out(2)"
-    }, 2.5) // Re-entry splash
-    .to(splashEl, {
-      opacity: 0,
-      scale: 1,
-      duration: 0.8
-    }, 3.1)
+  // Subtle breathing animation for character
+  if (layersRef.value[charIdx]) {
+    gsap.to(layersRef.value[charIdx], {
+      scale: 1.05,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    })
   }
 
-  // Mouse move disabled per user request
-  // window.addEventListener('mousemove', handleMouseMove)
+  // Fade in the text overlay
+  if (overlayRef.value) {
+    gsap.fromTo(overlayRef.value,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 2, ease: 'power2.out', delay: 0.8 }
+    )
+  }
+}
+
+onMounted(() => {
+  initAnimations()
+  window.addEventListener('mousemove', handleMouseMove)
+})
+
+watch(isNight, () => {
+  nextTick(() => {
+    initAnimations()
+  })
 })
 
 // const lyricsData = [
@@ -461,25 +547,53 @@ onUnmounted(() => {
     ></audio>
   <section 
     ref="sectionRef"
-    class="hero-section relative w-full h-[56.25vw] min-h-[300px] overflow-hidden bg-[#5FBFCA]"
+    class="hero-section relative w-full h-[56.25vw] min-h-[400px] overflow-hidden transition-colors duration-1000"
+    :class="isNight ? 'bg-[#0B1426]' : 'bg-[#5FBFCA]'"
   >
-    <!-- Illustration Layers -->
-    <div 
-      v-for="(layer, index) in layers" 
-      :id="layer.id"
-      :key="layer.id"
-      :ref="el => { if (el) layersRef[index] = el as HTMLElement }"
-      class="absolute pointer-events-none"
-      :class="layer.style"
-      :style="{ zIndex: (layer as any).zIndex || (index + 10) }"
-    >
-      <img 
-        :src="layer.src" 
-        :alt="layer.id"
-        class="w-full h-full object-contain mix-blend-multiply"
-        loading="eager"
-      />
-    </div>
+    <!-- Day Layers -->
+    <template v-if="!isNight">
+      <div 
+        v-for="(layer, index) in dayLayers" 
+        :id="layer.id"
+        :key="layer.id"
+        :ref="el => { if (el) layersRef[index] = el as HTMLElement }"
+        class="absolute pointer-events-none parallax-layer"
+        :class="layer.style"
+        :style="{ zIndex: (layer as any).zIndex || (index + 10) }"
+      >
+        <img 
+          :src="layer.src" 
+          :alt="layer.id"
+          class="w-full h-full"
+          :class="[
+            (layer as any).blendMode || 'mix-blend-multiply',
+            layer.style.includes('object-cover') ? 'object-cover' : 'object-contain'
+          ]"
+          loading="eager"
+        />
+      </div>
+    </template>
+
+    <!-- Night Layers (all full-frame 2560x1440 compositing layers) -->
+    <template v-else>
+      <div 
+        v-for="(layer, index) in nightLayers" 
+        :id="layer.id"
+        :key="layer.id"
+        :ref="el => { if (el) layersRef[index] = el as HTMLElement }"
+        class="absolute pointer-events-none parallax-layer"
+        :class="layer.style"
+        :style="{ zIndex: (layer as any).zIndex || (index + 10) }"
+      >
+        <img 
+          :src="layer.src" 
+          :alt="layer.id"
+          class="w-full h-full object-cover"
+          :class="(layer as any).blendMode ? `mix-blend-${(layer as any).blendMode}` : ''"
+          loading="eager"
+        />
+      </div>
+    </template>
 
     <!-- Text Overlay: Refined LUVBLU title -->
     <div 
@@ -487,13 +601,29 @@ onUnmounted(() => {
       class="absolute inset-0 z-50 flex flex-col items-end justify-end md:justify-start pt-0 md:pt-40 pb-12 md:pb-0 px-6 md:pr-24 pointer-events-none"
     >
       <div class="text-right flex flex-col items-end">
-        <h1 class="hidden md:block text-7xl md:text-9xl font-serif text-[#1A4B6E] mb-1 drop-shadow-sm opacity-95 tracking-tighter mix-blend-multiply italic">
+        <h1 class="hidden md:block text-7xl md:text-9xl font-serif mb-1 drop-shadow-sm opacity-95 tracking-tighter italic"
+            :class="isNight ? 'text-blue-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]' : 'text-[#1A4B6E] mix-blend-multiply'">
           LUVBLU
         </h1>
-        <p class="hidden md:block text-xl md:text-2xl text-blue-800 font-medium tracking-tight mb-8">
+        <p class="hidden md:block text-xl md:text-2xl font-medium tracking-tight mb-8"
+           :class="isNight ? 'text-blue-300' : 'text-blue-800'">
           Small actions, Create Big Waves.
         </p>
         <div class="flex gap-4 justify-end pointer-events-auto">
+          <!-- Premium Day/Night Toggle -->
+          <button 
+            @click="toggleMode"
+            class="group relative flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-xl px-5 py-2.5 rounded-full transition-all duration-500 border border-white/20 shadow-2xl"
+            :title="isNight ? 'Switch to Day' : 'Switch to Night'"
+          >
+            <div class="relative w-6 h-6 flex items-center justify-center">
+              <span v-if="!isNight" class="text-xl transition-transform duration-500 group-hover:rotate-12">☀️</span>
+              <span v-else class="text-xl transition-transform duration-500 group-hover:-rotate-12">🌙</span>
+            </div>
+            <span class="text-xs font-bold tracking-widest uppercase opacity-80" :class="isNight ? 'text-blue-100' : 'text-blue-900'">
+              {{ isNight ? 'Night' : 'Day' }}
+            </span>
+          </button>
           <RouterLink to="/gallery" class="bg-blue-600/90 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-xl backdrop-blur-sm text-sm md:text-base">
             Explore Gallery
           </RouterLink>
