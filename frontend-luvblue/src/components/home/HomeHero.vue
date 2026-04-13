@@ -14,17 +14,10 @@ const isNightTime = () => {
   return hour < 6 || hour >= 18 // Night is 6 PM to 6 AM
 }
 
-const getInitialMode = () => {
-  const saved = localStorage.getItem('home-hero-mode')
-  if (saved) return saved === 'night'
-  return isNightTime()
-}
-
-const isNight = ref(getInitialMode())
+const isNight = ref(isNightTime())
 
 const toggleMode = () => {
   isNight.value = !isNight.value
-  localStorage.setItem('home-hero-mode', isNight.value ? 'night' : 'day')
 }
 
 // Manual positioning for each part to match loveblue_illustration.jpg
@@ -253,14 +246,11 @@ onMounted(() => {
   initAnimations()
   window.addEventListener('mousemove', handleMouseMove)
 
-  // Auto-update mode based on time if no manual override exists
+  // Auto-update mode based on local time
   timeCheckInterval = window.setInterval(() => {
-    const saved = localStorage.getItem('home-hero-mode')
-    if (!saved) { 
-      const newMode = isNightTime()
-      if (newMode !== isNight.value) {
-        isNight.value = newMode
-      }
+    const newMode = isNightTime()
+    if (newMode !== isNight.value) {
+      isNight.value = newMode
     }
   }, 60000) // Check every minute
 })
