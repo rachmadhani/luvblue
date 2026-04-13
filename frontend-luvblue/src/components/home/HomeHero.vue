@@ -135,20 +135,8 @@ const initAnimations = () => {
     gsap.set(speechBubbleRef.value, { y: 0 })
   }
 
-  // Night specific animations (GIFs handle starry, shooting star, lighthouse, smoke)
+  // Night specific animations
   if (isNight.value) {
-    // Subtle cloud drift with scale to prevent gaps
-    const cloudIdx = nightLayers.findIndex(l => l.id === 'clouds_night')
-    if (layersRef.value[cloudIdx]) {
-      gsap.to(layersRef.value[cloudIdx], {
-        x: '+=30',
-        scale: 1.1,
-        duration: 30,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      })
-    }
 
     // Glitter sparkle pulse
     const glitterIdx = nightLayers.findIndex(l => l.id === 'glitter')
