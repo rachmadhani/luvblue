@@ -42,7 +42,7 @@ const nightLayers = [
   { id: 'star5', src: '/night-parallax/APNG/luvblu_illustration_night_star_5.png', depth: 0.055, style: 'inset-0 w-full h-full', zIndex: 12 },
   { id: 'shootingstar', src: '/night-parallax/APNG/luvblu_illustration_001_night_shootingstar.png', depth: 0.03, style: 'inset-0 w-full h-full', zIndex: 14 },
   { id: 'clouds_night', src: '/night-parallax/luvblu_illustration_night_clouds.png', depth: 0.06, style: 'inset-0 w-full h-full scale-105', zIndex: 13 },
-  { id: 'lighthouse_lights', src: '/night-parallax/APNG/luvblu_illustration_night_lighthouse_light.png', depth: 0.08, style: 'inset-0 w-full h-full', zIndex: 18 },
+  { id: 'lighthouse_lights', src: '/night-parallax/APNG/luvblu_illustration_001_night_lighthouse_light.png', depth: 0.08, style: 'inset-0 w-full h-full', zIndex: 18 },
   { id: 'sparkaroundlights', src: '/night-parallax/luvblu_night_sparkaroundlights.png', depth: 0.08, style: 'inset-0 w-full h-full', zIndex: 16 },
   { id: 'lighthouse_night', src: '/night-parallax/luvblu_night_lighthouse.png', depth: 0.10, style: 'inset-0 w-full h-full', zIndex: 17 },
   { id: 'househill_night', src: '/night-parallax/luvblu_night_househill.png', depth: 0.12, style: 'inset-0 w-full h-full', zIndex: 23 },
@@ -114,12 +114,22 @@ const initAnimations = () => {
         { scale: 1, filter: 'blur(0px)', opacity: 1, duration: 2.5, ease: 'power2.out', delay: index * 0.1 }
       )
     } else {
+      // Apply offset for whale and character to move them higher in night mode
+      const nightOffset = isNight.value && (config.id.includes('whale_base') || config.id.includes('character')) ? -40 : 0
+      
       gsap.fromTo(layer,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.8, ease: 'power2.out', delay: 0.2 + index * 0.03 }
+        { y: 20 + nightOffset, opacity: 0 },
+        { y: nightOffset, opacity: 1, duration: 1.8, ease: 'power2.out', delay: 0.2 + index * 0.03 }
       )
     }
   })
+
+  // Adjust speech bubble base position for night mode if moving character
+  if (isNight.value && speechBubbleRef.value) {
+    gsap.set(speechBubbleRef.value, { y: -40 })
+  } else if (speechBubbleRef.value) {
+    gsap.set(speechBubbleRef.value, { y: 0 })
+  }
 
   // Night specific animations (GIFs handle starry, shooting star, lighthouse, smoke)
   if (isNight.value) {
