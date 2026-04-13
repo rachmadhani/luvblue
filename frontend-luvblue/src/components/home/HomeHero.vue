@@ -56,7 +56,7 @@ const nightLayers = [
   { id: 'kra', src: '/night-parallax/luvblu_night_kra.png', depth: 0.17, style: 'inset-0 w-full h-full', zIndex: 22 },
   { id: 'small_island_2_night', src: '/night-parallax/luvblu_night_small_island_2.png', depth: 0.18, style: 'inset-0 w-full h-full', zIndex: 23 },
   { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'inset-0 w-full left-[2.5%] h-full whale-night-pos', zIndex: 24 },
-  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'inset-0 w-full h-full left-[2%] character-night-pos', zIndex: 25 },
+  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'inset-0 w-full h-full left-[1.6%] character-night-pos', zIndex: 25 },
   { id: 'glitter', src: '/night-parallax/luvblu_night_glitter.png', depth: 0.24, style: 'inset-0 w-full h-full', zIndex: 30 },
 ]
 
@@ -211,8 +211,10 @@ const initAnimations = () => {
   const charIdx = activeLayers.findIndex(l => l.id.includes('character'))
   
   if (layersRef.value[whaleBaseIdx]) {
+    // Night uses full-frame images, so reduce bobbing to match day's visual feel
+    const bobAmount = isNight.value ? 2 : 5
     gsap.to([layersRef.value[whaleBaseIdx], layersRef.value[charIdx], speechBubbleRef.value], {
-      y: '+=5',
+      y: `+=${bobAmount}`,
       duration: 3,
       repeat: -1,
       yoyo: true,
@@ -220,8 +222,8 @@ const initAnimations = () => {
     })
   }
 
-  // Subtle breathing animation for character
-  if (layersRef.value[charIdx]) {
+  // Subtle breathing animation for character (Day only — night uses full-frame images so scale looks wrong)
+  if (layersRef.value[charIdx] && !isNight.value) {
     gsap.to(layersRef.value[charIdx], {
       scale: 1.05,
       duration: 3,
