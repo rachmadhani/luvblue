@@ -39,26 +39,26 @@ const dayLayers = [
 ]
 
 const nightLayers = [
-  { id: 'sky_night', src: '/night-parallax/luvblu_night_sky.png', depth: 0.02, style: 'sky-night-layer inset-0 w-full h-full', zIndex: 10 },
+  { id: 'sky_night', src: '/night-parallax/luvblu_night_sky.webp', depth: 0.02, style: 'sky-night-layer w-full h-auto object-cover', zIndex: 10 },
   { id: 'starry', src: '/night-parallax/APNG/luvblu_illustration_night_starry.png', depth: 0.03, style: 'starry-night-layer inset-0 w-full h-full', zIndex: 15 },
   { id: 'star1', src: '/night-parallax/APNG/luvblu_illustration_night_star_1.png', depth: 0.035, style: 'star-1-layer inset-0 w-full h-full', zIndex: 12 },
   { id: 'star2', src: '/night-parallax/APNG/luvblu_illustration_night_star_2.png', depth: 0.04, style: 'star-2-layer inset-0 w-full h-full', zIndex: 12 },
   { id: 'star3', src: '/night-parallax/APNG/luvblu_illustration_night_star_3.png', depth: 0.045, style: 'star-3-layer inset-0 w-full h-full', zIndex: 12 },
   { id: 'star4', src: '/night-parallax/APNG/luvblu_illustration_night_star_4.png', depth: 0.05, style: 'star-4-layer inset-0 w-full h-full', zIndex: 12 },
   { id: 'star5', src: '/night-parallax/APNG/luvblu_illustration_night_star_5.png', depth: 0.055, style: 'star-5-layer inset-0 w-full h-full', zIndex: 12 },
-  { id: 'shootingstar', src: '/night-parallax/APNG/luvblu_illustration_001_night_shootingstar.png', depth: 0.03, style: 'shootingstar-layer inset-0 w-full h-full', zIndex: 14 },
-  { id: 'clouds_night', src: '/night-parallax/luvblu_illustration_night_clouds.png', depth: 0.06, style: 'clouds-layer inset-0 w-full h-full scale-105', zIndex: 13 },
-  { id: 'lighthouse_lights', src: '/night-parallax/APNG/luvblu_illustration_001_night_lighthouse_light.png', depth: 0.08, style: 'lighthouse-layer inset-0 w-full h-full', zIndex: 18 },
+  { id: 'shootingstar', src: '/night-parallax/APNG/luvblu_illustration_001_night_shootingstar.png', depth: 0.03, style: 'shootingstar-layer w-full h-full', zIndex: 14 },
+  { id: 'clouds_night', src: '/night-parallax/luvblu_illustration_night_clouds.webp', depth: 0.06, style: 'clouds-night-layer w-full h-full scale-105 object-cover', zIndex: 13 },
+  { id: 'lighthouse_lights', src: '/night-parallax/APNG/luvblu_illustration_001_night_lighthouse_light.png', depth: 0.08, style: 'lighthouse-lights-night-layer w-full h-auto', zIndex: 18 },
   { id: 'sparkaroundlights', src: '/night-parallax/luvblu_night_sparkaroundlights.png', depth: 0.08, style: 'sparkaroundlights-layer inset-0 w-full h-full', zIndex: 16 },
-  { id: 'lighthouse_night', src: '/night-parallax/luvblu_night_lighthouse.png', depth: 0.10, style: 'lighthouse-night-layer inset-0 w-full h-full', zIndex: 17 },
-  { id: 'househill_night', src: '/night-parallax/luvblu_night_househill.png', depth: 0.12, style: 'househill-night-layer right-0  h-auto', zIndex: 23 },
-  { id: 'housesmoke', src: '/night-parallax/APNG/luvblu_illustration_001_night_housesmoke.png', depth: 0.12, style: 'housesmoke-night-layer inset-0 w-full h-full', zIndex: 19 },
-  { id: 'small_island_1_night', src: '/night-parallax/luvblu_night_small_island_1.png', depth: 0.14, style: 'small-island-1-night-layer inset-0 w-full h-full', zIndex: 23 },
-  { id: 'sea_night', src: '/night-parallax/luvblu_night_sea.png', depth: 0.16, style: 'sea-night-layer inset-0 w-full h-full', zIndex: 21 },
-  { id: 'kra', src: '/night-parallax/luvblu_night_kra.png', depth: 0.17, style: 'kra-night-layer inset-0 w-full h-full', zIndex: 22 },
-  { id: 'small_island_2_night', src: '/night-parallax/luvblu_night_small_island_2.png', depth: 0.18, style: 'small-island-2-night-layer inset-0 w-full h-full', zIndex: 23 },
-  { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'whale-small-night-layer inset-0 w-full left-[2.5%] h-full whale-night-pos', zIndex: 24 },
-  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'character-night-layer inset-0 w-full h-full left-[1.6%] character-night-pos', zIndex: 25 },
+  { id: 'lighthouse_night', src: '/night-parallax/luvblu_night_lighthouse.png', depth: 0.10, style: 'lighthouse-night-layer w-full h-auto', zIndex: 17 },
+  { id: 'househill_night', src: '/night-parallax/luvblu_night_househill.png', depth: 0.12, style: 'househill-night-layer right-0 w-full h-auto', zIndex: 23 },
+  { id: 'housesmoke', src: '/night-parallax/APNG/luvblu_illustration_001_night_housesmoke.png', depth: 0.12, style: 'housesmoke-night-layer w-full h-auto', zIndex: 19 },
+  { id: 'small_island_1_night', src: '/night-parallax/luvblu_night_small_island_1.png', depth: 0.14, style: 'small-island-1-night-layer w-full h-auto', zIndex: 23 },
+  { id: 'sea_night', src: '/night-parallax/luvblu_night_sea.webp', depth: 0.16, style: 'sea-night-layer inset-0 w-full h-auto', zIndex: 21 },
+  { id: 'kra', src: '/night-parallax/luvblu_night_kra.png', depth: 0.17, style: 'kra-night-layer w-full h-auto', zIndex: 22 },
+  { id: 'small_island_2_night', src: '/night-parallax/luvblu_night_small_island_2.png', depth: 0.18, style: 'small-island-2-night-layer w-full h-auto', zIndex: 23 },
+  { id: 'whale_base_night', src: '/night-parallax/luvblu_night_whale_small.png', depth: 0.20, style: 'whale-small-night-layer w-full left-[2.5%] h-auto whale-night-pos', zIndex: 24 },
+  { id: 'character_night', src: '/night-parallax/luvblu_night_character.png', depth: 0.22, style: 'character-night-layer w-full h-auto left-[1.6%] character-night-pos', zIndex: 25 },
   { id: 'glitter', src: '/night-parallax/luvblu_night_glitter.png', depth: 0.24, style: 'glitter-night-layer inset-0 w-full h-full', zIndex: 30 },
 ]
 
@@ -726,14 +726,12 @@ section {
   .sky-layer {
     width: 500px;
   }
-  
-  .househill-night-layer {
-    /* width: 1200px; */
-    
-    /* left: -50%; */
-  }
 
   .sea-layer{
+    width: 500px;
+  }
+
+  .sky-night-layer {
     width: 500px;
   }
 }
@@ -746,6 +744,10 @@ section {
 @media screen and (max-width: 767px) {
   .househill-layer {
     top: 52%;
+  }
+
+  .househill-night-layer {
+    top: 30%;
   }
 
   .speech-bubble {
@@ -764,16 +766,36 @@ section {
     top: 89%;
   }
 
+  .small-island-1-night-layer {
+    top: 43%;
+  }
+
   .small-island-2-layer {
     top: 95%;
+  }
+
+  .small-island-2-night-layer {
+    top: 43%;
   }
   
   .whale-small-layer {
     top: 60%;
   }
 
+  .whale-small-night-layer {
+    top: 35%;
+  }
+
   .character-layer {
      top: 57%;
+  }
+
+  .character-night-layer {
+    top: 35%;
+  }
+
+  .kra-night-layer {
+    top: 30%;
   }
 
   .whale-jump-layer {
@@ -782,6 +804,18 @@ section {
 
   .lighthouse-layer {
     top: 46%;
+  }
+
+  .lighthouse-night-layer {
+    top: 30%;
+  }
+
+  .lighthouse-lights-night-layer {
+    top: 30%;
+  }
+  
+  .housesmoke-night-layer {
+    top: 30%;
   }
 
   .whale-splash-layer {
@@ -797,6 +831,22 @@ section {
     top: 58%;
   }
 
+  .househill-night-layer {
+    top: 37%;
+  }
+
+  .housesmoke-night-layer {
+    top: 37%;
+  }
+
+  .lighthouse-night-layer {
+    top: 37%;
+  }
+
+  .lighthouse-lights-night-layer{
+    top: 37%;
+  }
+
   .speech-bubble {
     bottom: -20px;
   }
@@ -809,13 +859,22 @@ section {
     top: 90%;
   }
 
+  .small-island-1-night-layer {
+    top: 49%;
+  }
+
   .small-island-2-layer {
     top: 95%;
+  }
+
+  .small-island-2-night-layer {
+    top: 48%;
   }
 
   .lighthouse-layer {
     top: 54%;
   }
+
   .whale-splash-layer {
     top: 68%;
   }
@@ -826,6 +885,23 @@ section {
 
   .character-layer {
      top: 63%;
+  }
+
+  .whale-small-night-layer {
+    top: 43%;
+  }
+
+  .character-night-layer {
+    top: 43%;
+  }
+
+  .kra-night-layer {
+    top: 37%;
+  }
+
+  .sea-night-layer {
+    height: 105%;
+    bottom: 0;
   }
 
   .sea-layer {
