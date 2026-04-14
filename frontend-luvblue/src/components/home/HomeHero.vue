@@ -655,8 +655,6 @@ onUnmounted(() => {
     </div>
   </section>
 
-  <!-- ─── SCRAPBOOK HERO (Literal from user request) ─── -->
-
   <!-- ─── SCRAPBOOK HERO (from luvblu_en.html) ─── -->
   <section id="scrapbook-hero">
     <div class="hero-bg"></div>
@@ -685,21 +683,20 @@ onUnmounted(() => {
 
     <div class="hero-content section-inner" style="padding-top:0;padding-bottom:0;">
       <div class="hero-left">
-        <div class="hero-badge">My Blue Diary — Vol.2 is live ✨</div>
-        <h1 class="hero-title font-seriff">
+        <div class="hero-badge">Blue Campaign - Let's work together ✨</div>
+        <h1 class="hero-title font-serif">
           Small<br>
           <span class="accent">Actions,</span><br>
           Create <span class="pink">Big</span><br>
           Waves 🌊
         </h1>
-        <p class="hero-subtitle text-slate-600 text-lg leading-relaxed  italic opacity-80">
-          A love letter to the Earth —<br>
-          one blue diary at a time.
+        <p class="hero-subtitle text-slate-600 text-lg leading-relaxed italic opacity-80">
+         Sharing Love for the Earth —<br>
+         One Blue Picture at a Time
         </p>
-        <p class="hero-tagline">#LUVBLU ♡</p>
         <div class="hero-actions">
-          <RouterLink to="/diary" class="btn-primary">📖 Read My Diary</RouterLink>
-          <a href="https://www.instagram.com/ashley_luvblu" target="_blank" class="btn-secondary">✦ Follow on IG</a>
+          <RouterLink to="/blue-heart" class="btn-primary font-serif">Blue Campaign</RouterLink>
+          <a href="https://www.instagram.com/ashley_luvblu" target="_blank" class="btn-secondary font-serif">✦ Follow on IG</a>
         </div>
       </div>
 
@@ -1180,7 +1177,7 @@ section {
   gap: 10px;
   background: var(--teal);
   color: var(--white);
-  font-family: 'Caveat', cursive;
+  /* font-family: 'Caveat', cursive; */
   font-size: 18px;
   font-weight: 600;
   padding: 14px 32px;
@@ -1202,7 +1199,7 @@ section {
   gap: 10px;
   background: transparent;
   color: var(--navy);
-  font-family: 'Caveat', cursive;
+  /* font-family: 'Caveat', cursive; */
   font-size: 18px;
   font-weight: 600;
   padding: 14px 32px;
