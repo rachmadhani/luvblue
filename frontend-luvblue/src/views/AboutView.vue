@@ -47,7 +47,7 @@ onMounted(() => {
         <div class="relative group">
           <div class="absolute -inset-4 bg-blue-600/5 rounded-[2rem] transform rotate-3 group-hover:rotate-1 transition-transform duration-500"></div>
           <div class="relative aspect-square bg-slate-100 rounded-2xl shadow-xl overflow-hidden border border-blue-100 flex items-center justify-center">
-            <img src="/story/ashley_pic.png" alt="Ashley Profile" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+            <img src="/story/ashley_pic.webp" alt="Ashley Profile" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
           </div>
         </div>
       </div>

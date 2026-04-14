@@ -8,7 +8,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-52 w-auto opacity-100" loading="lazy" />
+            <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-62 w-auto opacity-100" loading="lazy" />
           </div>
           <p class="footer-tagline">
             Small Actions, Create Big Waves.<br>
