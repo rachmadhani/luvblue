@@ -245,7 +245,20 @@ onMounted(() => {
     if (newMode !== isNight.value) {
       isNight.value = newMode
     }
-  }, 60000) 
+  }, 60000)
+
+  // Scroll reveal observer for the new content section
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible')
+      }
+    })
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el)
+  })
 })
 
 watch(isNight, () => {
@@ -641,9 +654,139 @@ onUnmounted(() => {
       </div>
     </div>
   </section>
+
+  <!-- ─── SCRAPBOOK HERO (Literal from user request) ─── -->
+
+  <!-- ─── SCRAPBOOK HERO (from luvblu_en.html) ─── -->
+  <section id="scrapbook-hero">
+    <div class="hero-bg"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Doodles -->
+    <div class="doodle doodle-ring" style="top:18%;right:15%;opacity:0.25;">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="28" stroke="var(--teal)" stroke-width="2" stroke-dasharray="6 4" />
+      </svg>
+    </div>
+    <div class="doodle doodle-star" style="top:32%;left:8%;opacity:0.5;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 0v28M0 14h28M4 4l20 20M24 4L4 24" stroke="var(--mint)" stroke-width="1.5" />
+      </svg>
+    </div>
+    <div class="doodle" style="bottom:22%;right:7%;opacity:0.35;animation:float 6s 1s ease-in-out infinite;">
+      <svg width="48" height="44" viewBox="0 0 40 36" fill="none">
+        <path
+          d="M20 34L3 17C1 15 0 12 0 9.5 0 4.3 4.3 0 9.5 0c2.9 0 5.5 1.3 7.3 3.3L20 6.7l3.2-3.4C25 1.3 27.6 0 30.5 0 35.7 0 40 4.3 40 9.5c0 2.5-1 4.8-2.7 6.5L20 34z"
+          stroke="var(--pink)" stroke-width="2" fill="none" />
+      </svg>
+    </div>
+
+    <div class="hero-content section-inner" style="padding-top:0;padding-bottom:0;">
+      <div class="hero-left">
+        <div class="hero-badge">My Blue Diary — Vol.2 is live ✨</div>
+        <h1 class="hero-title font-seriff">
+          Small<br>
+          <span class="accent">Actions,</span><br>
+          Create <span class="pink">Big</span><br>
+          Waves 🌊
+        </h1>
+        <p class="hero-subtitle text-slate-600 text-lg leading-relaxed  italic opacity-80">
+          A love letter to the Earth —<br>
+          one blue diary at a time.
+        </p>
+        <p class="hero-tagline">#LUVBLU ♡</p>
+        <div class="hero-actions">
+          <RouterLink to="/diary" class="btn-primary">📖 Read My Diary</RouterLink>
+          <a href="https://www.instagram.com/ashley_luvblu" target="_blank" class="btn-secondary">✦ Follow on IG</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <!-- Wrapper 1 (Sakura - Large Center) -->
+        <div class="photo-wrapper pw-1">
+          <div class="card-photo polaroid">
+            <img class="polaroid-image" src="/pollaroid/pollaroid-1.jpg" alt="pollaroid 1" loading="lazy" style="height:190px;" />
+            <div class="polaroid-label">First Spring, First Kiss ♡</div>
+          </div>
+          <div class="tape tape-pink"></div>
+        </div>
+
+        <!-- Wrapper 2 (Tulip - Top Left) -->
+        <div class="photo-wrapper pw-2">
+          <div class="card-photo polaroid">
+            <img class="polaroid-image" src="/pollaroid/pollaroid-2.jpg" alt="pollaroid 2"  loading="lazy" style="height:140px;" />
+            <div class="polaroid-label">memories ✦</div>
+          </div>
+          <div class="tape tape-blue"></div>
+        </div>
+
+        <!-- Wrapper 3 (Wave - Far Top Right) -->
+        <div class="photo-wrapper pw-3">
+          <div class="card-photo polaroid">
+            <img class="polaroid-image" src="/pollaroid/pollaroid-3.jpg" alt="pollaroid 3" loading="lazy" style="height:130px;" />
+            <div class="polaroid-label">My Blue Diary</div>
+          </div>
+          <div class="tape tape-pink"></div>
+          <div class="sticker sticker-luv" style="top:110px; right:-10px; background:var(--blush); border-color:var(--pink); color:#d47fa0; transform:rotate(4deg);">🌊 #LUVBLU</div>
+        </div>
+
+        <!-- Wrapper 4 (Wave - Mid Right) -->
+        <div class="photo-wrapper pw-4">
+          <div class="card-photo polaroid">
+            <img class="polaroid-image" src="/pollaroid/pollaroid-4.jpg" alt="pollaroid 4" loading="lazy" style="height:150px;" />
+            <div class="polaroid-label">My Blue Diary</div>
+          </div>
+          <div class="tape tape-blue"></div>
+        </div>
+
+        <!-- Wrapper 5 (Tulip - Bottom Left) -->
+        <div class="photo-wrapper pw-5">
+          <div class="card-photo polaroid">
+            <img class="polaroid-image" src="/pollaroid/pollaroid-5.jpg" alt="pollaroid 5" loading="lazy" style="height:150px;" />
+            <div class="polaroid-label">memories ✦</div>
+          </div>
+          <div class="tape tape-blue"></div>
+        </div>
+
+        <!-- Wrapper 6 (Tulip - Bottom Mid) -->
+        <div class="photo-wrapper pw-6">
+          <div class="card-photo polaroid">
+            <img class="polaroid-image" src="/pollaroid/pollaroid-6.jpg" alt="pollaroid 6" loading="lazy" style="height:140px;" />
+            <div class="polaroid-label">memories ✦</div>
+          </div>
+          <div class="tape tape-blue"></div>
+        </div>
+
+        <!-- Wrapper 7 (Tulip - Bottom Right) -->
+        <div class="photo-wrapper pw-7">
+          <div class="card-photo polaroid">
+            <img class="polaroid-image" src="/pollaroid/pollaroid-7.jpg" alt="pollaroid 7" loading="lazy" style="height:150px;" />
+            <div class="polaroid-label">memories ✦</div>
+          </div>
+          <div class="tape tape-blue"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
+:root {
+  --sb-sky: #A8D5EA;
+  --sb-mint: #5BBCB8;
+  --sb-teal: #3A9E9A;
+  --sb-pink: #F5AECB;
+  --sb-blush: #F9D4E4;
+  --sb-ivory: #F7F4EE;
+  --sb-cream: #EDE8DF;
+  --sb-navy: #1D3557;
+  --sb-darkblue: #2B4E72;
+  --sb-warm: #C9A882;
+  --sb-white: #FDFCFA;
+}
+
 section {
   user-select: none;
 }
@@ -910,5 +1053,283 @@ section {
   }
 }
 
+
+
+/* ─── SCRAPBOOK HERO STYLES (Scoped to #scrapbook-hero) ─── */
+#scrapbook-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+#scrapbook-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 50%, rgba(168, 213, 234, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 70% at 80% 30%, rgba(245, 174, 203, 0.25) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 60% 80%, rgba(91, 188, 184, 0.15) 0%, transparent 60%);
+}
+
+#scrapbook-hero .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.3;
+  animation: float 8s ease-in-out infinite;
+}
+
+#scrapbook-hero .blob-1 { width: 300px; height: 300px; background: var(--sky); top: 10%; left: -80px; animation-delay: 0s; }
+#scrapbook-hero .blob-2 { width: 200px; height: 200px; background: var(--pink); top: 20%; right: 5%; animation-delay: 2s; }
+#scrapbook-hero .blob-3 { width: 250px; height: 250px; background: var(--mint); bottom: 15%; left: 30%; animation-delay: 4s; }
+
+#scrapbook-hero .doodle { position: absolute; opacity: 0.6; }
+#scrapbook-hero .doodle-star { animation: pulse-glow 3s ease-in-out infinite; }
+#scrapbook-hero .doodle-ring { animation: spin-slow 20s linear infinite; }
+
+@keyframes sb-spin-slow { to { transform: rotate(360deg); } }
+@keyframes sb-pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+#scrapbook-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+#scrapbook-hero .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(91, 188, 184, 0.12);
+  border: 1px solid rgba(91, 188, 184, 0.3);
+  border-radius: 50px;
+  padding: 6px 16px;
+  margin-bottom: 28px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 500;
+  animation: fadeSlideUp 0.8s ease both;
+}
+
+#scrapbook-hero .hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+#scrapbook-hero .hero-title {
+  /* font-family: 'Caveat', cursive; */
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--navy);
+  margin-bottom: 12px;
+  animation: fadeSlideUp 0.8s 0.1s ease both;
+}
+
+#scrapbook-hero .accent { color: var(--teal); }
+#scrapbook-hero .pink { color: var(--pink); }
+
+#scrapbook-hero .hero-subtitle {
+  /* font-family: 'Gowun Batang', serif; */
+  font-size: 18px;
+  color: var(--darkblue);
+  opacity: 0.7;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  font-style: italic;
+  animation: fadeSlideUp 0.8s 0.2s ease both;
+}
+
+#scrapbook-hero .hero-tagline {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: var(--teal);
+  margin-bottom: 44px;
+  animation: fadeSlideUp 0.8s 0.25s ease both;
+}
+
+#scrapbook-hero .hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.8s 0.35s ease both;
+}
+
+#scrapbook-hero .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--teal);
+  color: var(--white);
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 8px 24px rgba(91, 188, 184, 0.35);
+}
+
+#scrapbook-hero .btn-primary:hover {
+  background: var(--mint);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(91, 188, 184, 0.45);
+}
+
+#scrapbook-hero .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--navy);
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 50px;
+  border: 2px solid rgba(29, 53, 87, 0.2);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+#scrapbook-hero .btn-secondary:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  transform: translateY(-3px);
+}
+
+#scrapbook-hero .hero-right {
+  position: relative;
+  height: 700px;
+  animation: fadeSlideUp 0.8s 0.4s ease both;
+}
+
+#scrapbook-hero .photo-wrapper {
+  position: absolute;
+  transition: all 0.4s ease;
+}
+
+#scrapbook-hero .photo-wrapper:hover {
+  transform: rotate(0deg) scale(1.05) !important;
+  z-index: 50;
+}
+
+#scrapbook-hero .card-photo {
+  position: relative;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+#scrapbook-hero .polaroid {
+  padding: 14px 14px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+#scrapbook-hero .polaroid-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  background: #f0f0f0;
+}
+
+#scrapbook-hero .polaroid-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 15px;
+  color: var(--sb-navy);
+  opacity: 0.8;
+}
+
+/* Polaroids Arc Arrangement - Spaced Out */
+#scrapbook-hero .pw-1 { width: 230px; height: 300px; top: 160px; left: 130px; transform: rotate(2deg); z-index: 10; }
+#scrapbook-hero .pw-2 { width: 180px; height: 230px; top: 10px; left: -80px; transform: rotate(-8deg); z-index: 5; }
+#scrapbook-hero .pw-3 { width: 180px; height: 230px; top: -30px; right: -50px; transform: rotate(9deg); z-index: 6; }
+#scrapbook-hero .pw-4 { width: 180px; height: 230px; top: 250px; right: -80px; transform: rotate(-5deg); z-index: 7; }
+#scrapbook-hero .pw-5 { width: 190px; height: 240px; bottom: 0px; left: -80px; transform: rotate(-6deg); z-index: 4; }
+#scrapbook-hero .pw-6 { width: 180px; height: 230px; bottom: 20px; left: 150px; transform: rotate(3deg); z-index: 2; }
+#scrapbook-hero .pw-7 { width: 190px; height: 240px; bottom: -50px; right: -20px; transform: rotate(5deg); z-index: 8; }
+
+#scrapbook-hero .tape {
+  position: absolute;
+  height: 24px;
+  border-radius: 2px;
+  z-index: 15;
+  opacity: 0.8;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#scrapbook-hero .tape-pink { width: 80px; background: rgba(245, 174, 203, 0.7); transform: translateX(-50%) rotate(-2deg); }
+#scrapbook-hero .tape-blue { width: 70px; background: rgba(168, 213, 234, 0.65); transform: translateX(-50%) rotate(3deg); }
+
+#scrapbook-hero .pw-2 .tape { transform: translateX(-65%) rotate(-35deg); left: 15%; top: -8px; }
+#scrapbook-hero .pw-4 .tape { transform: rotate(90deg); left: auto; right: -18px; top: 35%; width: 55px; }
+#scrapbook-hero .pw-5 .tape { transform: rotate(-90deg); left: -18px; top: 35%; width: 55px; }
+#scrapbook-hero .pw-7 .tape { transform: rotate(-95deg); left: auto; right: 25%; top: -12px; }
+
+#scrapbook-hero .sticker {
+  position: absolute;
+  left: auto !important;
+  width: max-content;
+  font-family: 'Caveat', cursive;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 6px 14px;
+  z-index: 20;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--sb-teal);
+  background: var(--sb-white);
+  color: var(--sb-teal);
+}
+
+#scrapbook-hero .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+@media (max-width: 900px) {
+  #scrapbook-hero { padding: 120px 24px 80px; }
+  #scrapbook-hero .hero-content { grid-template-columns: 1fr; gap: 48px; }
+  #scrapbook-hero .hero-right { height: 300px; }
+  #scrapbook-hero .section-inner { padding: 0 24px; }
+}
+
+/* Global Reveal Classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 </style>
