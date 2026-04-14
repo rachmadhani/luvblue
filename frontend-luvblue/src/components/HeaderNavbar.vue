@@ -21,7 +21,7 @@ const navLinks = [
     ]
   },
   { name: 'Blue Gallery', to: { name: 'Gallery' } },
-  { name: 'Join Us', to: { name: 'Signup' } }
+  { name: 'Collab', to: { name: 'Signup' } }
 ]
 
 const toggleMenu = () => {
