@@ -657,6 +657,8 @@ onUnmounted(() => {
 
   <!-- ─── SCRAPBOOK HERO (from luvblu_en.html) ─── -->
   <section id="scrapbook-hero">
+    <!-- Similar fade to hero bottom but at the top -->
+    <div class="absolute inset-x-0 top-0 h-16 md:h-32 bg-gradient-to-b from-white to-transparent z-[25] pointer-events-none"></div>
     <div class="hero-bg"></div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
