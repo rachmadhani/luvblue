@@ -8,7 +8,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-32 w-auto opacity-100" loading="lazy" />
+            <img src="/logo/LUVBLU.png" alt="LUVBLU Logo" class="h-52 w-auto opacity-100" loading="lazy" />
           </div>
           <p class="footer-tagline">
             Small Actions, Create Big Waves.<br>
@@ -22,32 +22,26 @@
         </div>
 
         <div>
-          <div class="footer-col-title">Diary</div>
+          <!-- <div class="footer-col-title">Diary</div> -->
           <ul class="footer-links">
-            <li><a href="#diary">My Blue Diary</a></li>
-            <li><a href="#diary">Blue Letters</a></li>
-            <li><a href="#diary">Seasonal Stories</a></li>
-            <li><a href="#diary">Small Actions</a></li>
+            <li><RouterLink to="/about">Our Story</RouterLink></li>
+            <li><RouterLink to="/blue-heart">Blue Heart</RouterLink></li>
           </ul>
         </div>
 
         <div>
-          <div class="footer-col-title">Content</div>
+          <!-- <div class="footer-col-title">Content</div> -->
           <ul class="footer-links">
-            <li><a href="#reels">Blue Note Vol.1</a></li>
-            <li><a href="#reels">Blue Note Vol.2</a></li>
-            <li><a href="#reels">Hip Recycling</a></li>
-            <li><a href="https://www.instagram.com/ashley_luvblu" target="_blank">All Reels</a></li>
+             <li><RouterLink to="/diary">Blue Diary</RouterLink></li>
+            <li><RouterLink to="/gallery">Blue Gallery</RouterLink></li>
           </ul>
         </div>
 
         <div>
-          <div class="footer-col-title">Connect</div>
+          <!-- <div class="footer-col-title">Connect</div> -->
           <ul class="footer-links">
-            <li><a href="#shop">Eco Shop (Soon)</a></li>
-            <li><a href="#shop">Join Waitlist</a></li>
-            <li><a href="#collab">Collab Inquiry</a></li>
-            <li><a href="https://www.luvblu.com">luvblu.com</a></li>
+             <li><RouterLink to="/note">Blue Note</RouterLink></li>
+            <li><RouterLink to="/collab">Collab</RouterLink></li>
           </ul>
         </div>
       </div>
