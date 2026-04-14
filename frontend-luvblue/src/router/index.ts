@@ -77,6 +77,15 @@ const router = createRouter({
         layout: 'public',
       },
     },
+    {
+      path: '/collab',
+      name: 'Collab',
+      component: () => import('../views/CollabView.vue'),
+      meta: {
+        title: 'Collab - Let\'s Create Waves',
+        layout: 'public',
+      },
+    },
 
     // ==================
     // Admin Routes (TailAdmin Dashboard)

@@ -2,25 +2,6 @@
 import { ref, onMounted } from 'vue'
 
 const collabSection = ref<HTMLElement | null>(null)
-const form = ref({
-  name: '',
-  email: '',
-  subject: '',
-  message: ''
-})
-
-const isSubmitting = ref(false)
-
-const handleSubmit = async () => {
-  isSubmitting.value = true
-  // Backend integration later as requested
-  console.log('Form submitted:', form.value)
-  setTimeout(() => {
-    alert('Thank you! We will get back to you soon.')
-    form.value = { name: '', email: '', subject: '', message: '' }
-    isSubmitting.value = false
-  }, 1000)
-}
 
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
@@ -55,50 +36,11 @@ onMounted(() => {
         <span class="collab-tag">💙 Brand Partnerships</span>
       </div>
 
-      <form @submit.prevent="handleSubmit" class="collab-form">
-        <div class="collab-grid">
-          <div class="collab-field">
-            <input 
-              v-model="form.name" 
-              type="text" 
-              placeholder="Your Name" 
-              required 
-              class="collab-input"
-            />
-          </div>
-          <div class="collab-field">
-            <input 
-              v-model="form.email" 
-              type="email" 
-              placeholder="Email Address" 
-              required 
-              class="collab-input"
-            />
-          </div>
-        </div>
-        <div class="collab-field">
-          <input 
-            v-model="form.subject" 
-            type="text" 
-            placeholder="Subject" 
-            required 
-            class="collab-input"
-          />
-        </div>
-        <div class="collab-field">
-          <textarea 
-            v-model="form.message" 
-            placeholder="Tell us about your project..." 
-            required 
-            rows="4" 
-            class="collab-textarea"
-          ></textarea>
-        </div>
-        <button type="submit" class="collab-btn" :disabled="isSubmitting">
-          <span v-if="!isSubmitting">✦ Send Message →</span>
-          <span v-else>Sending...</span>
-        </button>
-      </form>
+      <div class="flex justify-center mt-4">
+        <RouterLink to="/collab" class="collab-btn">
+          ✦ Say Hello →
+        </RouterLink>
+      </div>
     </div>
   </section>
 </template>
