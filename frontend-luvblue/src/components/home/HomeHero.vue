@@ -695,8 +695,8 @@ onUnmounted(() => {
          One Blue Picture at a Time
         </p>
         <div class="hero-actions">
-          <RouterLink to="/blue-heart" class="btn-primary font-serif">Blue Campaign</RouterLink>
-          <a href="https://www.instagram.com/ashley_luvblu" target="_blank" class="btn-secondary font-serif">✦ Follow on IG</a>
+          <RouterLink to="/blue-heart" class="btn-primary text-sm font-medium">Blue Campaign</RouterLink>
+          <a href="https://www.instagram.com/ashley_luvblu" target="_blank" class="btn-secondary text-sm font-medium">@ashley_luvblu</a>
         </div>
       </div>
 
