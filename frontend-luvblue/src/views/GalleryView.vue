@@ -60,7 +60,7 @@ onMounted(fetchPosts)
 </script>
 
 <template>
-  <main class="pt-32 pb-24 px-4 min-h-screen bg-slate-50/50">
+  <main class="pt-32 pb-24 px-4 min-h-screen bg-[#fdfbf7]">
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
       <header class="text-center mb-16">

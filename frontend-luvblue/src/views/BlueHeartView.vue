@@ -3,7 +3,7 @@ import HeartGrid from '@/components/home/HeartGrid.vue'
 </script>
 
 <template>
-  <main class="min-h-screen bg-white">
+  <main class="min-h-screen bg-[#fdfbf7] ">
     <HeartGrid />
   </main>
 </template>

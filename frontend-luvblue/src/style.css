@@ -75,6 +75,7 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
 /* ─── ABOUT PAGE & SHARED COMPONENTS ─── */
 
 :root {
@@ -84,7 +85,7 @@ body {
 }
 
 #about {
-  background: #ffffff;
+  background: #fdfbf7;
   color: var(--navy);
   font-family: var(--font-dm);
 }
@@ -292,6 +293,7 @@ body {
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
   .about-visual {
     display: none;
   }
@@ -311,7 +313,8 @@ footer {
 
 .footer-top {
   display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr; /* Expanded first column for a larger logo */
+  grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+  /* Expanded first column for a larger logo */
   gap: 48px;
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
@@ -324,7 +327,8 @@ footer {
 }
 
 .footer-logo img {
-  height: 200px; /* Massive logo for maximum impact */
+  height: 200px;
+  /* Massive logo for maximum impact */
   width: auto;
   object-fit: contain;
 }
@@ -408,12 +412,15 @@ footer {
   .footer-top {
     grid-template-columns: 1fr 1fr;
   }
+
   .footer-brand {
     grid-column: 1 / -1;
   }
+
   footer {
     padding: 48px 24px 24px;
   }
+
   .footer-bottom {
     flex-direction: column;
     gap: 8px;

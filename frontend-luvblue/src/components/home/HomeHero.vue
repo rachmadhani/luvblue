@@ -707,7 +707,7 @@ onUnmounted(() => {
         <div class="photo-wrapper pw-1">
           <div class="card-photo polaroid">
             <img class="polaroid-image" src="/pollaroid/pollaroid-1.jpg" alt="pollaroid 1" loading="lazy" style="height:190px;" />
-            <div class="polaroid-label">First Spring, First Kiss ♡</div>
+            <!-- <div class="polaroid-label">First Spring, First Kiss ♡</div> -->
           </div>
           <div class="tape tape-pink"></div>
         </div>
@@ -716,7 +716,7 @@ onUnmounted(() => {
         <div class="photo-wrapper pw-2">
           <div class="card-photo polaroid">
             <img class="polaroid-image" src="/pollaroid/pollaroid-2.jpg" alt="pollaroid 2"  loading="lazy" style="height:140px;" />
-            <div class="polaroid-label">memories ✦</div>
+            <!-- <div class="polaroid-label">memories ✦</div> -->
           </div>
           <div class="tape tape-blue"></div>
         </div>
@@ -725,7 +725,7 @@ onUnmounted(() => {
         <div class="photo-wrapper pw-3">
           <div class="card-photo polaroid">
             <img class="polaroid-image" src="/pollaroid/pollaroid-3.jpg" alt="pollaroid 3" loading="lazy" style="height:130px;" />
-            <div class="polaroid-label">My Blue Diary</div>
+            <!-- <div class="polaroid-label">My Blue Diary</div> -->
           </div>
           <div class="tape tape-pink"></div>
           <div class="sticker sticker-luv" style="top:110px; right:-10px; background:var(--blush); border-color:var(--pink); color:#d47fa0; transform:rotate(4deg);">🌊 #LUVBLU</div>
@@ -735,7 +735,7 @@ onUnmounted(() => {
         <div class="photo-wrapper pw-4">
           <div class="card-photo polaroid">
             <img class="polaroid-image" src="/pollaroid/pollaroid-4.jpg" alt="pollaroid 4" loading="lazy" style="height:150px;" />
-            <div class="polaroid-label">My Blue Diary</div>
+            <!-- <div class="polaroid-label">My Blue Diary</div> -->
           </div>
           <div class="tape tape-blue"></div>
         </div>
@@ -744,7 +744,7 @@ onUnmounted(() => {
         <div class="photo-wrapper pw-5">
           <div class="card-photo polaroid">
             <img class="polaroid-image" src="/pollaroid/pollaroid-5.jpg" alt="pollaroid 5" loading="lazy" style="height:150px;" />
-            <div class="polaroid-label">memories ✦</div>
+            <!-- <div class="polaroid-label">memories ✦</div> -->
           </div>
           <div class="tape tape-blue"></div>
         </div>
@@ -753,7 +753,7 @@ onUnmounted(() => {
         <div class="photo-wrapper pw-6">
           <div class="card-photo polaroid">
             <img class="polaroid-image" src="/pollaroid/pollaroid-6.jpg" alt="pollaroid 6" loading="lazy" style="height:140px;" />
-            <div class="polaroid-label">memories ✦</div>
+            <!-- <div class="polaroid-label">memories ✦</div> -->
           </div>
           <div class="tape tape-blue"></div>
         </div>
@@ -762,7 +762,7 @@ onUnmounted(() => {
         <div class="photo-wrapper pw-7">
           <div class="card-photo polaroid">
             <img class="polaroid-image" src="/pollaroid/pollaroid-7.jpg" alt="pollaroid 7" loading="lazy" style="height:150px;" />
-            <div class="polaroid-label">memories ✦</div>
+            <!-- <div class="polaroid-label">memories ✦</div> -->
           </div>
           <div class="tape tape-blue"></div>
         </div>
@@ -1241,7 +1241,7 @@ section {
 }
 
 #scrapbook-hero .polaroid {
-  padding: 14px 14px 48px;
+  padding: 14px 14px 14px;
   display: flex;
   flex-direction: column;
 }
