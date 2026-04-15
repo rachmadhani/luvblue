@@ -311,22 +311,22 @@ footer {
 
 .footer-top {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr; /* Expanded first column for a larger logo */
   gap: 48px;
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   margin-bottom: 32px;
+  align-items: start;
 }
 
 .footer-logo {
-  font-family: var(--font-caveat);
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--teal);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.footer-logo img {
+  height: 200px; /* Massive logo for maximum impact */
+  width: auto;
+  object-fit: contain;
 }
 
 .footer-tagline {

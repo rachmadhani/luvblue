@@ -86,6 +86,24 @@ const router = createRouter({
         layout: 'public',
       },
     },
+    {
+      path: '/terms',
+      name: 'TermsOfUse',
+      component: () => import('../views/TermsOfUseView.vue'),
+      meta: {
+        title: 'Terms of Use | LUVBLU',
+        layout: 'public',
+      },
+    },
+    {
+      path: '/privacy',
+      name: 'PrivacyPolicy',
+      component: () => import('../views/PrivacyPolicyView.vue'),
+      meta: {
+        title: 'Privacy Policy | LUVBLU',
+        layout: 'public',
+      },
+    },
 
     // ==================
     // Admin Routes (TailAdmin Dashboard)
