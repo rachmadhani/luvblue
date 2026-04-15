@@ -323,11 +323,11 @@ footer {
 }
 
 .footer-logo {
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .footer-logo img {
-  height: 200px;
+  height: 250px;
   /* Massive logo for maximum impact */
   width: auto;
   object-fit: contain;

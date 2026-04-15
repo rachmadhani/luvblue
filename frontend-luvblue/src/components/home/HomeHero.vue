@@ -1241,7 +1241,7 @@ section {
 }
 
 #scrapbook-hero .polaroid {
-  padding: 14px 14px 14px;
+  padding: 14px 14px 48px;
   display: flex;
   flex-direction: column;
 }
