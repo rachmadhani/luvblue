@@ -9,7 +9,7 @@
             <component :is="Component" :key="route.path" />
           </Transition>
         </RouterView>
-        <TheCollab />
+        <TheCollab v-if="route.name !== 'Collab'" />
         <TheFooter />
       </div>
       <RouterView v-else v-slot="{ Component }">
