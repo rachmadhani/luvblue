@@ -16,8 +16,8 @@
           </p>
           <div class="footer-social">
             <a href="https://www.instagram.com/ashley_luvblu" target="_blank" class="social-btn" title="Instagram">📸</a>
-            <a href="https://www.luvblu.com" class="social-btn" title="Website">🌊</a>
-            <a href="mailto:hello@luvblu.com" class="social-btn" title="Email">💌</a>
+            <RouterLink to="/blue-heart" class="social-btn" title="Website">🌊</RouterLink>
+            <RouterLink to="/collab" class="social-btn" title="Email">💌</RouterLink>
           </div>
         </div>
 
